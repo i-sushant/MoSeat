@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom';
 import Aux from '../../hoc/Auxiliary';
 import Search from '../../Search/Search'
 import queryString from 'query-string';

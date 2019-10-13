@@ -35,8 +35,8 @@ class Search extends Component {
   }
   render(){
     let results = "There are no buses to show";
-     if(this.state.searchData){
-        results = this.state.searchData.buses.map(bus => {
+     if(this.props.searchData){
+        results = this.props.searchData.buses.map(bus => {
         return (
               <div className={classes.result_card}>
                 <div className={classes.inner_flex}>

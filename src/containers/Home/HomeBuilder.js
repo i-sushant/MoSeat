@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Aux from '../../hoc/Aux'
+import Aux from '../../hoc/Auxiliary'
 import Home from '../../Home/Home'
 class HomeBuilder extends Component {
     state = {
@@ -29,6 +29,7 @@ class HomeBuilder extends Component {
         destination:this.state.destination,
         journeyDate:this.state.journeyDate
     }
+    console.log(this.props)
     this.props.history.push('/search?source='+search.source+'&destination='+search.destination+"&journeyDate="+search.journeyDate);
   }
     render() {
