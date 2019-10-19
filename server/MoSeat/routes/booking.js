@@ -5,10 +5,10 @@ const Bus = require('../models/bus');
 const passport = require("passport");
 
 
-router.get("/", passport.authenticate("jwt", { session: false }), (req, res) => {
-    res.send("Add a bus");
+router.get("/new", passport.authenticate("jwt", { session: false }), (req, res) => {
+    res.send("Book now");
 })
-router.post("/", passport.authenticate("jwt",{ session: false }),(req, res) => {
+router.post("/new", passport.authenticate("jwt",{ session: false }),(req, res) => {
     if(!req.user){
         return res.status(404).json({'message':'User not found'})
     } else {
@@ -18,10 +18,10 @@ router.post("/", passport.authenticate("jwt",{ session: false }),(req, res) => {
     const journeyDate = formatDate.toUTCString();
     const numberOfSeats = parseInt(req.body.numberOfSeats);
     const bookingDetail = {
-        source: source,
-        destination: destination,
-        journeyDate: journeyDate,
-        numberOfSeats: numberOfSeats
+        source,
+        destination,
+        journeyDate,
+        numberOfSeats
     };
 
     Bus.findOne({
@@ -70,5 +70,7 @@ router.post("/", passport.authenticate("jwt",{ session: false }),(req, res) => {
     }
 
 });
-
+router.get('/old', (req,res) => {
+    return
+})
 module.exports = router;

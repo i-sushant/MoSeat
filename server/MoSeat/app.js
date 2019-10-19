@@ -15,6 +15,7 @@ app.use(function (req, res, next) {
 });
 app.use(cors());
 app.use(passport.initialize());
+require("./config/passport")(passport);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -31,8 +32,8 @@ app.get('/', (req, res) => {
     res.send("Hello World!");
 });
 
-app.use('/book',booking);
-app.use('/user',passport.authenticate('jwt', {session: false}), user);
+app.use('/bookings',booking);
+app.use('/user', user);
 app.use('/bus',bus);
 
 

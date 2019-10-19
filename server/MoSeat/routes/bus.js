@@ -15,7 +15,7 @@ router.get('/addbus',passport.authenticate("jwt",{ session: false }), (req, res)
         "message": "Add a bus"
     });
 })
-router.post('/addbus', (req, res) => {
+router.post('/addbus',passport.authenticate("jwt",{ session: false }), (req, res) => {
     let availableSeats = [];
     createSeats();
     function checkForLoopComplete(counter) {
@@ -31,8 +31,8 @@ router.post('/addbus', (req, res) => {
     }
     async function createBus() {
         const body = {
-            departureTime: parseInt(req.body.departureTime),
-            arrivalTime: parseInt(req.body.arrivalTime),
+            departureTime: req.body.departureTime,
+            arrivalTime: req.body.arrivalTime,
             fare: parseInt(req.body.fare),
             capacity: parseInt(req.body.capacity),
             source: req.body.source.toLowerCase(),

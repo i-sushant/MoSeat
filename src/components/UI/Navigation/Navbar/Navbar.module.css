@@ -1,0 +1,49 @@
+.navbar nav ul {
+    text-align: center;
+    background: #fff;
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+.navbar nav ul li {
+    display: inline-block;
+}
+
+.navbar nav ul li a {
+    padding: 25px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    /* color:#ffcdd2 ; */
+    color: #e4201d;
+    font-size: 18px;
+    text-decoration: none;
+    display: block;
+}
+
+.navbar nav ul li a:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(22, 18, 18, 0.6);
+    background: rgba(119, 2, 2, 0.733);
+    /* color: #ffcdd2 ; */
+    color: #fff;
+}
+
+.navbar {
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+}
+
+.logo {
+    margin-left: -7%;
+    display: inline-block;
+}
+
+.h3 {
+    color: #530806;
+    font: normal 40px "Cookie", cursive;
+    margin: 0 auto;
+}
+
+h3 span {
+    color: #ed3330;
+}

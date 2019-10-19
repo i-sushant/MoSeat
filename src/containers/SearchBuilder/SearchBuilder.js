@@ -1,74 +1,36 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom';
 import Aux from '../../hoc/Auxiliary';
-import Search from '../../Search/Search'
-import queryString from 'query-string';
-import axios from 'axios';
+import Search from '../../components/Search/Search'
+import { connect } from 'react-redux'
+import * as actions from '../../store/actions/index'
 class SearchBuilder extends Component {
-    _isMounted = false;
     state = {
         source: '',
         destination: '',
         journeyDate: '',
-        searchData: ''
+        searchData: '',
+        isAuthenticated: this.props.isAuthenticated
     }
-    componentDidMount() {
-        this._isMounted = true;
-        let queryObject = queryString.parse(this.props.location.search);
+    fieldChanged = event => {
         this.setState({
-            searchData:''
-        });
-        axios.post('http://localhost:3002/bus/search', queryObject)
-                .then(data => {
-                    if(this._isMounted){
-                        this.setState({
-                        searchData: data.data
-                    })
-                    }
-                    this.props.history.push('/search?source=' + this.state.source + '&destination=' + this.state.destination);
-                })
-                .catch(error => console.log(error));
-    }
-    componentWillUnmount(){
-        this._isMounted = false;
-    }
-    sourceChanged = event => {
-        console.log(event.target.value);
-        this.setState({
-            source: event.target.value
+            [event.target.name] : event.target.value
         })
     }
-    destinationChanged = event => {
-        console.log(event.target.value);
-        this.setState({
-            destination: event.target.value
-        })
-    }
-    dateChanged = event => {
-        console.log(event.target.value);
-        this.setState({
-            journeyDate: event.target.value
-        })
-    }
-    searchHandler = () => {
-        //let queryObject = queryString.parse(this.props.location.search);
+    searchHandler = (event) => {
+        event.preventDefault();
         let queryObject = {
             source: this.state.source,
-            destination: this.state.destination
+            destination: this.state.destination,
+            journeyDate:this.state.journeyDate
         }
-        console.log(queryObject)
         this.setState({
             searchData:''
         });
-        axios.post('http://localhost:3002/bus/search', queryObject)
-            .then(data => {
-                this.setState({
-                    searchData: data.data
-                    })
-                console.log(data);
-                this.props.history.push('/search?source=' + this.state.source + '&destination=' + this.state.destination);
-            })
-            .catch(error => console.log(error));
+        this.props.onSourceChanged(this.state.source);
+        this.props.onDestinationChanged(this.state.destination);
+        this.props.onJourneyDateChanged(this.state.journeyDate);
+        this.props.searchBuses(queryObject);
+        this.props.history.push('/search?source=' + this.state.source + '&destination=' + this.state.destination);
     }
     render() {
         return (
@@ -77,14 +39,28 @@ class SearchBuilder extends Component {
                         source={this.state.source}
                         destination={this.state.destination}
                         journeyDate={this.state.journeyDate}
-                        sourceChanged={this.sourceChanged}
-                        destinationChanged={this.destinationChanged}
-                        dateChanged={this.dateChanged}
                         searchHandler={this.searchHandler}
-                        searchData={this.state.searchData}/>
+                        searchData={this.props.searchData? this.props.searchData : ''}
+                        fieldChanged={this.fieldChanged}
+                />
             </Aux>
         )
     }
 }
-
-export default SearchBuilder
+const mapStateToProps = state => {
+    return {
+        source:state.search.source,
+        destination:state.search.destination,
+        journeyDate: state.search.journeyDate,
+        searchData:state.search.searchData
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onSourceChanged: (source) => dispatch(actions.addSource(source)),
+        onDestinationChanged: (destination) => dispatch(actions.addDestination(destination)),
+        onJourneyDateChanged: (journeyDate) => dispatch(actions.addJourneyDate(journeyDate)),
+        searchBuses: (searchData) => dispatch(actions.searchBuses(searchData))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(SearchBuilder);

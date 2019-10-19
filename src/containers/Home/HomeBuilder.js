@@ -1,51 +1,93 @@
 import React, { Component } from 'react'
 import Aux from '../../hoc/Auxiliary'
-import Home from '../../Home/Home'
+import Home from '../../components/Home/Home';
+import Modal from '../../components/UI/Modal/Modal';
+import Auth from '../Auth/Auth'
+import { connect } from 'react-redux'
+import * as actions from '../../store/actions/index'
 class HomeBuilder extends Component {
     state = {
         source: '',
         destination: '',
-        journeyDate: ''
+        journeyDate: '',
+        authClicked:false,
+        authCancel:false,
+        searchData:''
   }
-  sourceChanged = event => {
+  fieldChanged = event => {
     this.setState({
-      source:event.target.value
+      [event.target.name]:event.target.value
     })
   }
-  destinationChanged = event => {
+  handleAuthClicked = () => {
     this.setState({
-      destination:event.target.value
+      authClicked: !this.state.authClicked
     })
   }
-  dateChanged = event => {
+  authCancelHandler =() => {
     this.setState({
-      journeyDate:event.target.value
+      authClicked:!this.state.authClicked
     })
   }
   searchHandler = event => {
-    event.preventDefault();
-    const search = {
-        source:this.state.source,
-        destination:this.state.destination,
-        journeyDate:this.state.journeyDate
+    event.preventDefault();  
+    const queryObject = {
+      source:this.state.source,
+      destination:this.state.destination,
+      journeyDate:this.state.journeyDate
     }
-    console.log(this.props)
+    this.props.onSourceChanged(this.state.source);
+    this.props.onDestinationChanged(this.state.destination);
+    this.props.onJourneyDateChanged(this.state.journeyDate);
+    this.props.searchBuses(queryObject);
+    const search = {
+      source: this.state.source,
+      destination: this.state.destination,
+      journeyDate: this.state.journeyDate
+    }
     this.props.history.push('/search?source='+search.source+'&destination='+search.destination+"&journeyDate="+search.journeyDate);
   }
     render() {
+      let Authorize = (
+        <Aux>
+            <Auth />
+        </Aux>
+      )
         return (
             <Aux>
-                <Home sourceChanged={this.sourceChanged}
-                      destinationChanged={this.destinationChanged}
-                      dateChanged={this.dateChanged}
+                <Modal show={this.state.authClicked && !this.props.isAuthenticated} modalClosed={this.authCancelHandler}>
+                  {Authorize}
+                </Modal>
+                <Home fieldChanged={this.fieldChanged}
                       searchHandler={this.searchHandler}
                       source={this.state.source}
                       destination={this.state.destination}
-                      journeyDate={this.state.journeyDate}/>
+                      journeyDate={this.state.journeyDate}
+                      handleAuthClicked = {this.handleAuthClicked}
+                      isAuthenticated= {this.props.isAuthenticated}
+                      name={this.props.name}
+                      logout={this.props.logout}
+                      />
                 
             </Aux>
         )
     }
 }
-
-export default HomeBuilder;
+const mapStateToProps = state => {
+ return {
+    isAuthenticated: state.auth.token,
+    error:state.auth.error,
+    name:state.auth.name
+ }
+  
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    onSourceChanged: (source) => dispatch(actions.addSource(source)),
+    onDestinationChanged: (destination) => dispatch(actions.addDestination(destination)),
+    onJourneyDateChanged: (journeyDate) => dispatch(actions.addJourneyDate(journeyDate)),
+    searchBuses: (searchData) => dispatch(actions.searchBuses(searchData)),
+    logout:() => dispatch(actions.logout())
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(HomeBuilder);

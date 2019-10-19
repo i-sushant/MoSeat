@@ -36,7 +36,26 @@ router.post("/register", (req, res) => {
                             if (err) {return err;};
                             user.password = hash;
                             user.save()
-                                .then(user => res.json(user))
+                                .then(user => {
+                                    const payload = {
+                                        id: user.id,
+                                        name: user.name,
+                                        email: user.email
+                                    }
+                                    jwt.sign(
+                                    payload,
+                                    keys.secretOrKey, {
+                                        expiresIn: 3600
+                                    },
+                                    (err, token) => {
+                                        res.json({
+                                            success: true,
+                                            token: `Bearer ${token}`,
+                                            user: payload,
+                                            expiresIn: 3600
+                                        });
+                                    }
+                                    )})
                                 .catch(err => console.log(err));
                         });
                     });
@@ -75,14 +94,15 @@ router.post("/login", (req, res) => {
                     (err, token) => {
                         res.json({
                             success: true,
-                            token: `Bearer ${token}`
+                            token: `Bearer ${token}`,
+                            user:payload,
+                            expiresIn:3600
                         });
                     }
                 );
-                return res.json({"message": "Login successful"});
             } else {
-                return res.status(400).json({
-                    password: "Password Incorrect"
+                res.status(400).json({
+                    message: "Password Incorrect"
                 });
             }
         });
