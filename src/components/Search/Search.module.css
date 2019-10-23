@@ -29,6 +29,14 @@
   justify-content: space-between;
   position: relative;
 }
+.journey_date_container input[type="date"]{
+  background: rgba(94, 1, 1, 0.993);
+  width:95%;
+  font: 15px/24px "Lato", Arial, sans-serif;
+  color: grey;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+}
 .search_container label {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #fff;
@@ -82,7 +90,7 @@
 
 .effect_1 ~ .focus_border {
   position:absolute;
-  bottom: 0;
+  bottom: -1px;
   left: 0;
   width: 0;
   height: 2px;

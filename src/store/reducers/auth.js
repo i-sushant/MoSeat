@@ -4,20 +4,24 @@ const initialState = {
     token : null,
     userId: null,
     name:'',
+    email:'',
     error:null,
-    authRedirectPath:'/'
+    authRedirectPath:'/',
+    loading:false
 }
 const authStart = (state, action) => {
-    return updateObject(state, { error: null, loading: true })
+    return updateObject(state, { error: null, loading: true})
+}
+const authReady = (state,action) => {
+    return updateObject(state,{error : null,loading: false})
 }
 const authSuccess = (state,action) => {
-    console.log("Inside auth success " +action);
     return updateObject(state,{ 
         token:action.token,
         userId:action.userId,
         name:action.name,
-        error:null,
-        loading:false
+        email:action.email,
+        error:null
      });
      
 }
@@ -28,7 +32,7 @@ const authFail =(state, action) => {
     })
 }
 const authLogout = (state,action) => {
-    return updateObject(state, {token:null, userId:null})
+    return updateObject(state, {token:null, userId:null,name:null, email:null})
 }
 const setAuthRedirectPath = (state,action) => {
     return updateObject(state,{ authRedirectPath:action.path});
@@ -36,7 +40,8 @@ const setAuthRedirectPath = (state,action) => {
 const reducer = (state =initialState,action) => {
     switch(action.type) {
         case actionTypes.AUTH_START: return authStart(state, action);
-        case actionTypes.AUTH_SUCCESS: return authSuccess(state,action)
+        case actionTypes.AUTH_READY: return authReady(state,action);
+        case actionTypes.AUTH_SUCCESS: return authSuccess(state,action);
         case actionTypes.AUTH_FAIL: return authFail(state,action)
         case actionTypes.AUTH_LOGOUT: return authLogout(state,action)
         case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state,action);

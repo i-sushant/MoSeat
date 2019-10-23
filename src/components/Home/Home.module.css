@@ -114,6 +114,15 @@ h3 {
   margin-left: 53%;
   position: absolute;
 }
+.col_5 input[type="date"]{
+  font: 15px/24px "Lato", Arial, sans-serif;
+  color: grey;
+  background: #fff;
+  width: 80%;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  margin-top: -10%;
+}
 .col_7 {
   /* float: ; */
   width: 27.33%;

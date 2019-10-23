@@ -2,7 +2,9 @@ export {
     auth,
     logout,
     setAuthRedirectPath,
-    authCheckState
+    authCheckState,
+    authStart,
+    authReady
 }
 from './auth'
 
@@ -15,5 +17,7 @@ export {
     searchBuses,
     addDestination,
     addSource,
-    addJourneyDate
+    addJourneyDate,
+    searchBusesStart,
+    searchBusesFail
 } from './search'

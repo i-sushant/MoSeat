@@ -1,14 +1,29 @@
-import React, {Component} from "react";
+import React from "react";
 import {Link} from 'react-router-dom';
 import classes from "./Search.module.css";
 import './Search.module.css'
 import Navbar from '../../components/UI/Navigation/Navbar/Navbar'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExchangeAlt, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faExchangeAlt, faClock,faFrown } from "@fortawesome/free-solid-svg-icons";
 import Footer from '../UI/Navigation/Footer/Footer';
+import Spinner from "../UI/Spinner/Spinner";
 const Search = (props) =>  {
-    let results = "There are no buses to show";
-     if (props.searchData) {
+    let results = (
+      <div style={{'marginTop':'10%','color':'black','opacity':'0.5','textAlign':'center'}}>
+        {props.error?<FontAwesomeIcon icon={faFrown} style={{'fontSize':'70px','opacity':'0.5'}}/> : null}
+        <h3 style={{'color':'black','opacity':'0.4'}}>
+          {props.error? props.error : "Book your seat now!"}
+        </h3>
+      </div>
+    )
+    if(props.loading){
+      results = (
+        <div style={{'marginTop':'10%','color':'black','opacity':'0.5','textAlign':'center'}}>
+            <Spinner />
+        </div>
+      )
+    }
+     if (props.searchData.length >= 1) {
         results = props.searchData.map((bus, index) => {
         return (
               <div className={classes.result_card} key={index}>
@@ -29,16 +44,15 @@ const Search = (props) =>  {
                       <span className={[classes.selectseats, classes.seat_availability].join(' ')}>Available Seats : {bus.availableSeats.length}</span>
                     </div>
                     <div>
-                        <Link className={[classes.selectseats, classes.modalbtn1].join(' ')} to={'/bookticket/'+bus._id} >SUBMIT</Link>
-                    </div>
-                    
+                      <Link className={[classes.selectseats, classes.modalbtn1].join(' ')} to={'/booknow/'+bus._id} >SUBMIT</Link>
+                    </div> 
                 </div>
             </div>)
     });
   }
     return (
       <div className={classes.main_container}>
-        <Navbar />
+        <Navbar {...props}/>
         <form className={classes.search_container} onSubmit={props.submitHandler}>
           < div className = { classes.source_container }>
             <label>From</label>
@@ -53,7 +67,7 @@ const Search = (props) =>  {
             <span className={classes.focus_border} />
           </div>
           <div className={classes.exchange_icon}>
-            <FontAwesomeIcon icon={faExchangeAlt} style={{'color':'#ffffff','fontSize':'25px'}}/>
+            <FontAwesomeIcon icon={faExchangeAlt} style={{'color':'#ffffff','fontSize':'25px'}} onClick={props.switchRoute}/>
           </div>
           <div className={classes.destination_container}>
             <label>To</label>
@@ -72,7 +86,7 @@ const Search = (props) =>  {
             <input
               placeholder="Enter journey date"
               className={classes.effect_1}
-              type="text"
+              type="date"
               name='journeyDate'
               value={props.journeyDate}
               onChange = {(event) => props.fieldChanged(event)}

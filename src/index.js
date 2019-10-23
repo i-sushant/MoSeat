@@ -9,25 +9,25 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import App from './App';
 import "./styles.css";
-
+import setAuthToken from '../src/utils/setAuthToken'
  
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 const rootReducer = combineReducers({
   auth:authReducer,
   search:searchReducer,
   booking:bookingReducer
-})
+});
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
+setAuthToken();
 document.body.style.margin = 0;
 document.body.style.padding = 0;
 const app = (
   <Provider store={store}>
       <BrowserRouter>
         <App />
-    </BrowserRouter>
-  </Provider>
-    
+      </BrowserRouter>
+  </Provider>   
 )
 const rootElement = document.getElementById("root");
 ReactDOM.render(app, rootElement);

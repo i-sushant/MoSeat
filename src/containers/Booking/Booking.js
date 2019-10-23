@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
-import Booking from '../../components/Booking/Booking'
+import BookingTickets from '../../components/Booking/Booking'
 class Booking extends Component {
+    state= {
+        name:'',
+        numberOfSeats:0,
+        busNumber:'',
+        totalPrice:0
+
+    }
     render() {
         return (
             <div>
-                <Booking />
+                <BookingTickets />
             </div>
         )
     }
 }
-
+const mapStateTOProps = state => {
+    return {
+        name:state.booking.name,
+        totalPrice:state.booking.totalPrice,
+        
+    }
+}
 export default Booking

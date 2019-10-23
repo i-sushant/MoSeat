@@ -4,7 +4,7 @@ import Home from '../../components/Home/Home';
 import Modal from '../../components/UI/Modal/Modal';
 import Auth from '../Auth/Auth'
 import { connect } from 'react-redux'
-import * as actions from '../../store/actions/index'
+import * as actions from '../../store/actions/index' 
 class HomeBuilder extends Component {
     state = {
         source: '',
@@ -47,10 +47,11 @@ class HomeBuilder extends Component {
     }
     this.props.history.push('/search?source='+search.source+'&destination='+search.destination+"&journeyDate="+search.journeyDate);
   }
+    
     render() {
       let Authorize = (
         <Aux>
-            <Auth />
+            <Auth authStart = {this.props.authStart}/>
         </Aux>
       )
         return (
@@ -66,20 +67,19 @@ class HomeBuilder extends Component {
                       handleAuthClicked = {this.handleAuthClicked}
                       isAuthenticated= {this.props.isAuthenticated}
                       name={this.props.name}
-                      logout={this.props.logout}
-                      />
+                      logout={this.props.logout} />
                 
             </Aux>
         )
     }
 }
 const mapStateToProps = state => {
- return {
-    isAuthenticated: state.auth.token,
-    error:state.auth.error,
-    name:state.auth.name
- }
-  
+  return {
+      isAuthenticated: state.auth.token != null,
+      error:state.auth.error,
+      name:state.auth.name,
+      loading:state.auth.loading
+  }
 }
 const mapDispatchToProps = dispatch => {
   return {
@@ -87,7 +87,8 @@ const mapDispatchToProps = dispatch => {
     onDestinationChanged: (destination) => dispatch(actions.addDestination(destination)),
     onJourneyDateChanged: (journeyDate) => dispatch(actions.addJourneyDate(journeyDate)),
     searchBuses: (searchData) => dispatch(actions.searchBuses(searchData)),
-    logout:() => dispatch(actions.logout())
+    logout:() => dispatch(actions.logout()),
+    authStart:() => dispatch(actions.authStart())
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(HomeBuilder);

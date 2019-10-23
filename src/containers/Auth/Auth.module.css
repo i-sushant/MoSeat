@@ -27,6 +27,7 @@
     width:100%;
     height:4em;
     padding-left:8%;
+    position:relative
 }
 .input_container input{
     width:70%;
@@ -43,6 +44,7 @@
 }
 .name_field_container{
     width: 50%;
+    position: relative;
 }
 .name_field_container input{
     width:70%;
@@ -63,4 +65,42 @@
 .submit_container span{
     font-size: 17px;
     cursor: pointer;
+    width:100%;
+    height:100%;
+    text-align: center;
+    padding-top:4%;
+}
+.effect_1 {
+    border: 0;
+    padding: 7px 0;
+    border-bottom: 1px solid #ccc;
+}
+.name_field_container .effect_1 ~ .focus_border{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 0;
+    top:48%;
+    height: 2px;
+    background-color: #ed3330;
+    transition: 0.4s;
+}
+.name_field_container .effect_1:focus~.focus_border {
+    width: 70%;
+    transition: 0.4s;
+}
+.effect_1 ~ .focus_border {
+    position: absolute;
+    bottom: 0px;
+    left: 7.5%;
+    width: 0;
+    top:48%;
+    height: 2px;
+    background-color: #ed3330;
+    transition: 0.4s;
+}
+
+.effect_1:focus~.focus_border {
+    width: 65%;
+    transition: 0.4s;
 }

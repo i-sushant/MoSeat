@@ -51,7 +51,6 @@ router.post("/register", (req, res) => {
                                         res.json({
                                             success: true,
                                             token: `Bearer ${token}`,
-                                            user: payload,
                                             expiresIn: 3600
                                         });
                                     }
@@ -95,7 +94,6 @@ router.post("/login", (req, res) => {
                         res.json({
                             success: true,
                             token: `Bearer ${token}`,
-                            user:payload,
                             expiresIn:3600
                         });
                     }

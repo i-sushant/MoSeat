@@ -5,6 +5,7 @@ const initialState = {
     source: "",
     destination: '',
     journeyDate: '',
+    totalSeats:0,
     totalPrice:0,
     booked:false,
     loading:false,

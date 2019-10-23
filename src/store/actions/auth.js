@@ -1,17 +1,23 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import jwt_decode from 'jwt-decode';
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START
     }
 }
-
-export const authSuccess = (token, userId,name) => {
+export const authReady = () => {
+    return {
+        type:actionTypes.AUTH_READY
+    }
+}
+export const authSuccess = (token, userId,name,email) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         token: token,
         userId: userId,
-        name:name
+        name:name,
+        email:email
     }
 }
 export const authFail = (error) => {
@@ -24,6 +30,7 @@ export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId');
+    localStorage.removeItem("email");
     return {
         type: actionTypes.AUTH_LOGOUT
     }
@@ -60,13 +67,14 @@ export const auth = (email, password,phoneNumber,firstName,lastName, isSignup) =
         };
         axios.post(url, authData)
              .then(response => {
-                console.log(response);
-                const expirationDate = new Date(new Date().getSeconds() + response.data.expiresIn * 1000)
+                const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+                const decoded = jwt_decode(response.data.token.substring(7));
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('expirationDate', expirationDate)
-                localStorage.setItem('userId', response.data.user.id);
-                localStorage.setItem('name',response.data.user.name);
-                dispatch(authSuccess(response.data.token, response.data.user.id, response.data.user.name))
+                localStorage.setItem('userId', decoded.id);
+                localStorage.setItem('name',decoded.name)
+                localStorage.setItem('email', decoded.email);
+                dispatch(authSuccess(response.data.token, decoded.id, decoded.name, decoded.email));
                 dispatch(checkAuthTimeout(response.data.expiresIn))
             })
             .catch(err => {
@@ -88,9 +96,9 @@ export const authCheckState = () => {
             } else {
                 const userId = localStorage.getItem('userId');
                 const name = localStorage.getItem('name');
-                dispatch(authSuccess(token, userId, name));
+                const email = localStorage.getItem('email');
+                dispatch(authSuccess(token, userId,name,email));
             }
-            dispatch(authSuccess())
             dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))
         }
     }

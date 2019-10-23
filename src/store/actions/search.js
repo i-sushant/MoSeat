@@ -20,10 +20,11 @@ export const addJourneyDate = (journeyDate) => {
         journeyDate: journeyDate
     }
 }
+export const searchBusesFail = (error) => {
 
-export const searchBusesFail = () => {
     return {
         type:actionTypes.SEARCH_BUSES_FAIL,
+        error:error
     }
 }
 export const searchBusesStart = () => {
@@ -43,10 +44,16 @@ export const searchBuses = (searchParams) => {
         dispatch(searchBusesStart());
         axios.post('/bus/search', searchParams)
             .then(response => {
-                dispatch(searchBusesSuccess(response.data.buses));
+                if (response.data.buses)
+                    dispatch(searchBusesSuccess(response.data.buses));
+                else {
+                    dispatch(searchBusesFail(response.data.error))
+                }
+                    
             })
             .catch(error => {
-                dispatch(searchBusesFail());
+                console.log(error);
+                dispatch(searchBusesFail(error));
             })
     }
 }

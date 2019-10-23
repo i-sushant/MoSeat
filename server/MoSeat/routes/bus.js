@@ -6,9 +6,14 @@ const passport = require("passport");
 router.post('/search',(req,res) => {
     Bus.find({source:req.body.source.toLowerCase(), destination:req.body.destination.toLowerCase()})
     .then(buses => {
-        return res.json({buses:buses})
+        if(buses.length>=1)
+            res.json({buses:buses})
+        else{
+            res.json({error:"Sorry no buses found on that route"})
+        } 
+            
     })
-    .catch(error => console.log(error));
+    .catch(error => res.json({error:error}));
 })
 router.get('/addbus',passport.authenticate("jwt",{ session: false }), (req, res) => {
     return res.json({

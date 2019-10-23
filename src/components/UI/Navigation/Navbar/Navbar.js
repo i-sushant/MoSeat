@@ -2,7 +2,26 @@ import React from 'react'
 import classes from './Navbar.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBus } from '@fortawesome/free-solid-svg-icons'
-const Navbar = () => {
+import {Link} from 'react-router-dom'
+const Navbar = (props) => {
+    let name = null;
+    let logout = null;
+    if(props.isAuthenticated){
+        name=(
+            <li>
+                <Link to={'/search'} >
+                    <strong>{props.name}</strong>
+                </Link>
+            </li>
+        )
+        logout = (
+            <li>
+                <Link to={'/'} onClick={props.logout}>
+                    <strong>Logout</strong>
+                </Link>
+            </li>
+        )
+    }
     return (
         <div>
             <div className={classes.navbar}>
@@ -37,6 +56,8 @@ const Navbar = () => {
                         <strong>Contact</strong>
                         </a>
                     </li>
+                    {name}
+                    {logout}
                     </ul>
                 </nav>
             </div>
