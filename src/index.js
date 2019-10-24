@@ -24,7 +24,7 @@ document.body.style.margin = 0;
 document.body.style.padding = 0;
 const app = (
   <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <App />
       </BrowserRouter>
   </Provider>   
