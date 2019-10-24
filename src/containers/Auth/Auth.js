@@ -108,7 +108,7 @@ class Auth extends Component {
             );
         }
 
-        let authForm = authForm = (
+        let authForm =  (
             <div className={classes.form_container}>
                     <div className={classes.header}>
                         <FontAwesomeIcon icon={faBus} style={{'fontSize':'40px','marginTop':'1%'}}/>

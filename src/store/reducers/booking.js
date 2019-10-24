@@ -13,17 +13,17 @@ const initialState = {
     busId:''
 }
 
-const bookingInit = (state, action) => {
-    const updatedState = {
-        source:action.source,
-        destination:action.destination,
-        journeyDate:action.journeyDate,
-        totalSeats:action.totalSeats,
-        totalPrice:action.basePrice * action.totalSeats,
-        booked:false
-    }
-    return updateObject(state, updatedState)
-}
+// const bookingInit = (state, action) => {
+//     const updatedState = {
+//         source:action.source,
+//         destination:action.destination,
+//         journeyDate:action.journeyDate,
+//         totalSeats:action.totalSeats,
+//         totalPrice:action.basePrice * action.totalSeats,
+//         booked:false
+//     }
+//     return updateObject(state, updatedState)
+// }
 const setField = (state, action) => {
     const formatDate = action.journeyDate.split('-');
     const journeyDate = [formatDate[2], formatDate[1], formatDate[0]].join('-')

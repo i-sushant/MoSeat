@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import {Redirect} from 'react-router-dom'
 import BookingTickets from '../../components/Booking/Booking'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
-import Modal from '../../components/UI/Modal/Modal'
 
 class Booking extends Component {
     state= {

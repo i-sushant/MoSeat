@@ -1,6 +1,6 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3002/'
+    baseURL: 'https://peaceful-waters-64481.herokuapp.com/'
 })
 export default instance
