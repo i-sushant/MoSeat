@@ -24,6 +24,13 @@ class HomeBuilder extends Component {
       authClicked: !this.state.authClicked
     })
   }
+  switchRoute = (event) => {
+        event.preventDefault();
+        this.setState({
+            source:this.state.destination,
+            destination:this.state.source
+        })
+    }
   authCancelHandler =() => {
     this.setState({
       authClicked:!this.state.authClicked
@@ -51,6 +58,7 @@ class HomeBuilder extends Component {
     render() {
       let Authorize = (
         <Aux>
+            {this.props.error? <h5>{this.props.error}</h5> : null}
             <Auth authStart = {this.props.authStart}/>
         </Aux>
       )
@@ -67,7 +75,8 @@ class HomeBuilder extends Component {
                       handleAuthClicked = {this.handleAuthClicked}
                       isAuthenticated= {this.props.isAuthenticated}
                       name={this.props.name}
-                      logout={this.props.logout} />
+                      logout={this.props.logout} 
+                      switchRoute={this.switchRoute}/>
                 
             </Aux>
         )

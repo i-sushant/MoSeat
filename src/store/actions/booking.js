@@ -1,9 +1,41 @@
 import * as actionTypes from '../actions/actionTypes'
 import axios from '../../axios-base'
 
-export const bookingInit = () => {
+export const setField = (busId, source, destination, journeyDate, basePrice) => {
     return {
-        type:actionTypes.BOOKING_INIT
+        type:actionTypes.SET_FIELD,
+        busId:busId,
+        source:source,
+        destination:destination,
+        journeyDate:journeyDate,
+        basePrice:basePrice
+    }
+}
+export const addSeat = () => {
+    return {
+        type:actionTypes.ADD_SEAT
+    }
+}
+export const removeSeat = () => {
+    return {
+        type: actionTypes.REMOVE_SEAT
+    }
+}
+export const changeTotalSeats = (totalSeats) => {
+    return {
+        type:actionTypes.CHANGE_TOTAL_SEATS,
+        totalSeats:totalSeats
+    }
+}
+export const updateTotalPrice = () => {
+    return {
+        type:actionTypes.UPDATE_TOTAL_PRICE
+    }
+}
+export const bookingInit = (bookingData) => {
+    return {
+        type:actionTypes.BOOKING_INIT,
+        ...bookingData
     }
 }
 export const bookingSuccess = () => {
@@ -18,8 +50,9 @@ export const bookingFail = () => {
 }
 export const bookNow = (bookingData) => {
     return dispatch => {
-        dispatch(bookingInit());
-        axios.post('/book', bookingData)
+        //dispatch(bookingInit(bookingData));
+        console.log(bookingData)
+        axios.post('/bookings/new', bookingData)
             .then(response => {
                console.log(response.data);
                dispatch(bookingSuccess()); 
@@ -34,9 +67,10 @@ export const fetchBookingsStart = () => {
         type:actionTypes.FETCH_BOOKINGS_START
     }
 }
-export const fetchBookingsSuccess =() => {
+export const fetchBookingsSuccess = (fetchedBookings) => {
     return {
-        type:actionTypes.FETCH_BOOKINGS_SUCCESS
+        type:actionTypes.FETCH_BOOKINGS_SUCCESS,
+        bookings: fetchedBookings
     }
 }
 export const fetchBookingsFailure = () => {
@@ -49,9 +83,7 @@ export const fetchBookings = () => {
         dispatch(fetchBookingsStart());
         axios.get('/bookings/old')
             .then(response => {
-                const fetchedBookings = [];
-                //to be completed
-                dispatch(fetchBookingsSuccess());
+                dispatch(fetchBookingsSuccess(response.data.bookings));
             })
             .catch(error => {
                 dispatch(fetchBookingsFailure());

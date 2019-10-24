@@ -6,11 +6,13 @@ const bookingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    name:String,
     source: String,
     destination: String,
     journeyDate: String,
     numberOfSeats: Number,
     seatNumbers: [Number],
+    totalFare:Number,
     busId: {
         type: Schema.Types.ObjectId,
         ref: "Bus"

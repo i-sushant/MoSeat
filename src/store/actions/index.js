@@ -10,7 +10,12 @@ from './auth'
 
 export {
     fetchBookings,
-    bookNow
+    bookNow,
+    setField,
+    addSeat,
+    removeSeat,
+    changeTotalSeats,
+    updateTotalPrice
 } from './booking'
 
 export {

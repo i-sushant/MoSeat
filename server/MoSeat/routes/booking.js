@@ -8,30 +8,36 @@ const passport = require("passport");
 router.get("/new", passport.authenticate("jwt", { session: false }), (req, res) => {
     res.send("Book now");
 })
-router.post("/new", passport.authenticate("jwt",{ session: false }),(req, res) => {
+router.post("/new", passport.authenticate("jwt", { session: false }),(req, res) => {
     if(!req.user){
         return res.status(404).json({'message':'User not found'})
     } else {
+    const passengerName = req.body.name
+    const busId = req.body.busId;
     const source = req.body.source;
     const destination = req.body.destination;
-    const formatDate = new Date(req.body.journeyDate);
-    const journeyDate = formatDate.toUTCString();
-    const numberOfSeats = parseInt(req.body.numberOfSeats);
+    const initialDate = req.body.journeyDate.split('-');
+    const newDate = initialDate.reverse().join('-');
+    const journeyDate = new Date(newDate);
+    const numberOfSeats = parseInt(req.body.totalSeats);
+    const totalFare = parseInt(req.body.totalPrice)
     const bookingDetail = {
-        source,
-        destination,
-        journeyDate,
-        numberOfSeats
+        name: passengerName,
+        source:source,
+        destination:destination,
+        journeyDate:journeyDate,
+        numberOfSeats:numberOfSeats,
+        busId:busId,
+        passengerName:passengerName,
+        totalFare : totalFare
     };
-
     Bus.findOne({
-            source: req.body.source,
-            destination: req.body.destination
+            _id:req.body.busId
         })
         .then(bus => {
             if (!bus) {
                 return res.status(404).json({
-                    "message": "Bus not found"
+                    "message": "Bus not found",
                 })
             } else {
                 if (numberOfSeats > bus.availableSeats.length) {
@@ -39,7 +45,6 @@ router.post("/new", passport.authenticate("jwt",{ session: false }),(req, res) =
                         "message": "Not enough seats"
                     });
                 } else {
-                    const busId = bus._id;
                     let bookedSeats = bus.availableSeats.slice(0, numberOfSeats);
                     const seatsAvailable = bus.availableSeats.slice(0);
                     bus.availableSeats = seatsAvailable.slice(numberOfSeats);
@@ -48,7 +53,6 @@ router.post("/new", passport.authenticate("jwt",{ session: false }),(req, res) =
                     const bookingDetails = {
                         ...bookingDetail,
                         user: req.user._id,
-                        busId: busId,
                         seatNumbers: bookedSeats
                     }
                     Booking.create(bookingDetails)
@@ -70,7 +74,15 @@ router.post("/new", passport.authenticate("jwt",{ session: false }),(req, res) =
     }
 
 });
-router.get('/old', (req,res) => {
-    return
+router.get('/old',passport.authenticate("jwt", { session: false }) , (req,res) => {
+    Booking.find({user:req.user._id})
+    .exec()
+    .then(bookings => {
+        if(!bookings){
+            return res.status(404).json({"message":'No Past Bookings'})
+        }
+       res.json({bookings:bookings})
+    })
+    .catch(err => res.status(400).json({"message":err}));
 })
 module.exports = router;

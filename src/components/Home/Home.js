@@ -28,8 +28,8 @@ const Home = (props) => {
   if(props.isAuthenticated){
     name = (
       <li>
-          <Link to={'/'}>
-            <strong>{props.name}</strong>
+          <Link to={'/showbookings'}>
+            <strong>My Bookings</strong>
           </Link>
         </li>
   )
@@ -95,7 +95,7 @@ const Home = (props) => {
               </div>
               <div className={classes.col_6}>
                 <h2>
-                  <FontAwesomeIcon icon={faExchangeAlt} className={classes.swap} />
+                  <FontAwesomeIcon icon={faExchangeAlt} className={classes.swap} onClick={props.switchRoute}/>
                 </h2>
               </div>
               <div className={classes.col_4}>

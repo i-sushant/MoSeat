@@ -11,12 +11,12 @@ const Booking = (props) => {
                 <div className={classes.form_container}>
                     <form onSubmit={props.handleSubmit}>
                         <div className={classes.input_container}>
-                            <input placeholder="Main Passesnger" name="name" required value={props.passengerName} className={classes.effect_1} type="text" onChange={props.inputChangeHandler}/>
+                            <input placeholder="Main Passesnger" name="name" required  className={classes.effect_1} type="text" onChange={props.nameChangeHandler}/>
                             <span className={classes.focus_border} />
                         </div>
                         <div className={classes.selectseat_container}>
                             <span className={classes.seatValue} onClick={props.decreaseSeat}>-</span>
-                            <input type="number" onChange={props.inputChangeHandler} required value={props.seatValue} name="totalSeats" placeholder="5"/>
+                            <input type="number" onChange={props.seatChangeHandler} required value={props.totalSeats} name="totalSeats" placeholder="5"/>
                             <span className={classes.seatValue} onClick={props.increaseSeat}>+</span>
                         </div>
                     </form>
@@ -26,12 +26,13 @@ const Booking = (props) => {
                        <h3>Booking Summary</h3>
                     </div>
                     <h4>Bus number : 15</h4>
-                    <h4>Source : Cuttack</h4>
-                    <h4>Destination : Barbil</h4>
-                    <h4>Passenger name : Sushant Gupta</h4>
-                    <h4>Total Seats : 5</h4>
-                    <h4>Total Price : 100</h4>
-                    <button>BOOK NOW !</button>
+                    <h4>Journey Date: {props.journeyDate}</h4>
+                    <h4 style={{'textTransform':'capitalize'}}>Source : {props.source}</h4>
+                    <h4 style={{'textTransform':'capitalize'}}>Destination : {props.destination}</h4>
+                    <h4>Passenger name : {props.passengerName}</h4>
+                    <h4>Total Seats : {props.totalSeats}</h4>
+                    <h4>Total Price : {props.totalPrice ? props.totalPrice : null}</h4>
+                    <button onClick={props.submitHandler}>BOOK NOW !</button>
                 </div>
             </div>
             <Footer />

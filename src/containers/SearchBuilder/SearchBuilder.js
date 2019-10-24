@@ -40,6 +40,9 @@ class SearchBuilder extends Component {
         setTimeout(() =>  this.props.searchBuses(queryObject), 1500);
         this.props.history.push('/search?source=' + this.state.source + '&destination=' + this.state.destination);
     }
+    setFieldForBooking = (busId, source, destination,basePrice) => {
+        this.props.setFieldForBooking(busId, source, destination, this.state.journeyDate, basePrice);
+    }
     render() {
         return (
             <Aux>
@@ -59,6 +62,7 @@ class SearchBuilder extends Component {
                         loading={this.props.loading}
                         error={this.props.error}
                         switchRoute={this.switchRoute}
+                        setFieldForBooking= {this.setFieldForBooking}
                 />
             </Aux>
         )
@@ -83,8 +87,8 @@ const mapDispatchToProps = dispatch => {
         onJourneyDateChanged: (journeyDate) => dispatch(actions.addJourneyDate(journeyDate)),
         searchBuses: (searchData) => dispatch(actions.searchBuses(searchData)),
         logout: () => dispatch(actions.logout()),
-        searchBusesStart: () => dispatch(actions.searchBusesStart())
-        
+        searchBusesStart: () => dispatch(actions.searchBusesStart()),
+        setFieldForBooking: (busId, source, destination, journeyDate, basePrice) => dispatch(actions.setField(busId, source, destination, journeyDate, basePrice))
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(SearchBuilder);
