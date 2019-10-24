@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import {Redirect} from 'react-router-dom'
 import BookingTickets from '../../components/Booking/Booking'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
+import Modal from '../../components/UI/Modal/Modal'
 
 class Booking extends Component {
     state= {
@@ -53,9 +55,10 @@ class Booking extends Component {
             busId:this.props.busId
         }
         this.props.bookNow(bookingData);
-        this.props.history.push('/showbookings');
+        this.props.history.push('/');
     } 
     render() {
+        
         return (
             <div>
                 <BookingTickets decreaseSeat={this.decreaseSeat}
@@ -83,7 +86,8 @@ const mapStateToProps = state => {
         busId:state.booking.busId,
         name:state.booking.name,
         totalSeats:state.booking.totalSeats,
-        totalPrice:state.booking.totalPrice
+        totalPrice:state.booking.totalPrice,
+        booked:state.booking.booked
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -38,9 +38,10 @@ export const bookingInit = (bookingData) => {
         ...bookingData
     }
 }
-export const bookingSuccess = () => {
+export const bookingSuccess = (bookingData) => {
     return {
-        type:actionTypes.BOOKING_SUCCESS
+        type:actionTypes.BOOKING_SUCCESS,
+        bookingData:bookingData
     } 
 }
 export const bookingFail = () => {
@@ -50,12 +51,9 @@ export const bookingFail = () => {
 }
 export const bookNow = (bookingData) => {
     return dispatch => {
-        //dispatch(bookingInit(bookingData));
-        console.log(bookingData)
         axios.post('/bookings/new', bookingData)
             .then(response => {
-               console.log(response.data);
-               dispatch(bookingSuccess()); 
+               dispatch(bookingSuccess(response.data));
             })
             .catch(error => {
                 dispatch(bookingFail());

@@ -55,6 +55,7 @@ const bookingSeatStart = (state, action) => {
     })
 }
 const bookingSeatSuccess = (state, action) => {
+    const bookingUpdate = action.bookingData
     return updateObject(state, {
         loading:false,
         booked:true,
@@ -64,7 +65,8 @@ const bookingSeatSuccess = (state, action) => {
         totalSeats: '',
         totalPrice: 0,
         basePrice: 0,
-        busId: ''
+        busId: '',
+        bookings: state.booking.concat(bookingUpdate)
     })
 }
 

@@ -2,12 +2,12 @@ import React from 'react'
 import Navbar from '../../UI/Navigation/Navbar/Navbar';
 import Footer from '../../UI/Navigation/Footer/Footer';
 import classes from './ShowBookings.module.css'
+import Spinner from '../../UI/Spinner/Spinner'
 const ShowBookings = (props) => {
-    let bookings = (
-        <div>
-            <h4>No Past Bookings</h4>
-        </div>
-    );
+    let bookings ="";
+    if(props.loading){
+        bookings = <Spinner />
+    }
     if(props.fetchedBookings.length >= 1){
         bookings = props.fetchedBookings.reverse().map(booking => {
             return (
@@ -44,7 +44,7 @@ const ShowBookings = (props) => {
         <div>
             <Navbar />
             <div className={classes.body_container}>
-                <h3>My Bookings</h3>
+                <h3>Mo<span style={{'color':'#ed3330'}}>Seats</span> </h3>
                 <div className={classes.line_separator}></div>
                 <div className={classes.results_container}>
                     {bookings}

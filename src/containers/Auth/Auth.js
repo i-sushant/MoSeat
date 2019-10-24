@@ -5,6 +5,7 @@ import {faBus} from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import Modal from '../../components/UI/Modal/Modal'
 class Auth extends Component {
     constructor(props){
         super(props);
@@ -122,7 +123,13 @@ class Auth extends Component {
             authForm = <Spinner />  
             setTimeout(this.props.authReady,1000); 
         }
-        
+        if(this.props.error){
+            authForm = (
+                <Modal show={this.props.error !== ''} modalClosed={this.authCancelHandler}>
+                    <h4>{this.props.error}</h4>
+                </Modal>
+            )
+        }
         return (
             <div>
                 {authForm}

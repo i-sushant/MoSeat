@@ -3,7 +3,10 @@ const router = express.Router();
 const Booking = require('../models/bookings');
 const Bus = require('../models/bus');
 const passport = require("passport");
+const sgMail = require('@sendgrid/mail');
+const keys = require('../config/keys');
 
+sgMail.setApiKey(keys.sendGridAPIKey);
 
 router.get("/new", passport.authenticate("jwt", { session: false }), (req, res) => {
     res.send("Book now");
@@ -58,6 +61,14 @@ router.post("/new", passport.authenticate("jwt", { session: false }),(req, res) 
                     Booking.create(bookingDetails)
                         .then(booking => {
                             booking.save();
+                            const msg = {
+                                to: req.user.email,
+                                from: 'bookings@moseat.com',
+                                subject: 'Booking successfull',
+                                text: `This is a confirmation mail that your booking is successfull for ${bookingDetail.source} to ${bookingDetail.destination}`,
+                                html: `<p>This is a confirmation mail that your booking is successfull for ${bookingDetail.journeyDate} from <strong>${bookingDetail.source}</strong> to <strong>${bookingDetail.destination}</strong></p> . <p>Thank You for using MoSeat </p>`,
+                            };
+                            sgMail.send(msg).then(sent => console.log("Email sent")).catch(error => console.log("error occured"));
                             return res.status(200).json(booking)
                         })
                         .catch(error => {

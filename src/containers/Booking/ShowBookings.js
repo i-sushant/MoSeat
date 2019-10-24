@@ -4,19 +4,20 @@ import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
 class ShowBookings extends Component {
     componentDidMount(){
-        this.props.fetchBookings();
+        setTimeout(() => this.props.fetchBookings(), 1000)
     }
     render() {
         return (
             <div>
-               <ShowBooking fetchedBookings= {this.props.fetchedBookings}/> 
+               <ShowBooking fetchedBookings= {this.props.fetchedBookings} loading={this.props.loading}/> 
             </div>
         )
     }
 }
 const mapStateToProps = state => {
     return {
-        fetchedBookings : state.booking.bookings
+        fetchedBookings : state.booking.bookings,
+        loading:state.booking.loading
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -38,7 +38,7 @@ export const logout = () => {
 export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(() => {
-            dispatch(logout());
+            dispatch(logout())
         }, expirationTime * 1000)
     }
 }
@@ -68,7 +68,7 @@ export const auth = (email, password,phoneNumber,firstName,lastName, isSignup) =
         axios.post(url, authData)
              .then(response => {
                 const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-                const decoded = jwt_decode(response.data.token.substring(7));
+                const decoded = jwt_decode(response.data.token.split(' ')[1]);
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('expirationDate', expirationDate)
                 localStorage.setItem('userId', decoded.id);
@@ -78,8 +78,7 @@ export const auth = (email, password,phoneNumber,firstName,lastName, isSignup) =
                 dispatch(checkAuthTimeout(response.data.expiresIn))
             })
             .catch(err => {
-                console.log(err)
-                dispatch(authFail(err.response.data.error));
+                dispatch(authFail(err));
             })
     }
 }

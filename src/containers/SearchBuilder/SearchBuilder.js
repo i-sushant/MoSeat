@@ -46,9 +46,6 @@ class SearchBuilder extends Component {
     render() {
         return (
             <Aux>
-                {/* <Modal show={this.state.authClicked && !this.props.isAuthenticated} modalClosed={this.authCancelHandler}>
-                  {Authorize}
-                </Modal> */}
                <Search  availableBuses={this.state.searchData.buses}
                         source={this.state.source}
                         destination={this.state.destination}

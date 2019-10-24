@@ -47,8 +47,8 @@ const Navbar = (props) => {
                         </a>
                     </li>
                     <li>
-                        <a href="/">
-                        <strong>Services</strong>
+                        <a href="/search">
+                        <strong>Search</strong>
                         </a>
                     </li>
                     <li>

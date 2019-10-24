@@ -48,7 +48,7 @@ class App extends Component {
     if(this.props.isAuthenticated){
       routes = (
         <Switch>
-          <Route path="/showbookings" component={this.state.loading ? () =>  spinner : ShowBookings} />
+          <Route path="/showbookings" component={ShowBookings} />
           <Route path="/booknow/:id" component={this.state.loading ? () =>  spinner : BookingsTickets} />
           <Route path="/search" component={this.state.loading ? () =>  spinner : Search} />
           <Route path="/" exact component={this.state.loading ? () => spinner : Home}/>
