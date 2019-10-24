@@ -55,9 +55,9 @@ export const auth = (email, password,phoneNumber,firstName,lastName, isSignup) =
             email: email,
             password: password
         }
-        let url = 'http://localhost:3002/user/login';
+        let url = '/user/login';
         if (isSignup) {
-            url = 'http://localhost:3002/user/register';
+            url = '/user/register';
             authData = {
                 email: email,
                 password: password,
