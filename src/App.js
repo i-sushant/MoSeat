@@ -6,7 +6,7 @@ import setAuthToken from '../src/utils/setAuthToken'
 import Spinner from '../src/components/UI/Spinner/Spinner' 
 import asyncComponent from "./hoc/asyncComponent/asyncComponent";
 const asyncSearch = asyncComponent(() => {
-  return import('.containers/SearchBuilder/SearchBuilder');
+  return import('../src/containers/SearchBuilder/SearchBuilder');
 })
 const asyncHome = asyncComponent(() => {
   return import('../src/containers/Home/HomeBuilder')
