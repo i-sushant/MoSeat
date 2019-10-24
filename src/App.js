@@ -9,13 +9,13 @@ const asyncSearch = asyncComponent(() => {
   return import('.containers/SearchBuilder/SearchBuilder');
 })
 const asyncHome = asyncComponent(() => {
-  return import('./containers/Home/HomeBuilder')
+  return import('../src/containers/Home/HomeBuilder')
 });
 const asyncBooking = asyncComponent(() => {
-  return import('./containers/Booking/Booking');
+  return import('../src/containers/Booking/Booking');
 });
 const asyncShowBookings = asyncComponent(() => {
-  return import('./containers/Booking/ShowBookings')
+  return import('../src/containers/Booking/ShowBookings')
 })
 class App extends Component {
   state={
