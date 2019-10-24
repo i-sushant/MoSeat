@@ -1,13 +1,22 @@
 import React ,{ Component }from "react";
 import {Switch, Route , withRouter } from "react-router-dom";
-import Home from "./containers/Home/HomeBuilder";
-import BookingsTickets from "../src/containers/Booking/Booking";
-import Search from "../src/containers/SearchBuilder/SearchBuilder";
 import * as actions from './store/actions/index'
 import {connect} from 'react-redux';
 import setAuthToken from '../src/utils/setAuthToken'
-import Spinner from '../src/components/UI/Spinner/Spinner'
-import ShowBookings from '../src/containers/Booking/ShowBookings' 
+import Spinner from '../src/components/UI/Spinner/Spinner' 
+import asyncComponent from "./hoc/asyncComponent/asyncComponent";
+const asyncSearch = asyncComponent(() => {
+  return import('.containers/SearchBuilder/SearchBuilder');
+})
+const asyncHome = asyncComponent(() => {
+  return import('./containers/Home/HomeBuilder')
+});
+const asyncBooking = asyncComponent(() => {
+  return import('./containers/Booking/Booking');
+});
+const asyncShowBookings = asyncComponent(() => {
+  return import('./containers/Booking/ShowBookings')
+})
 class App extends Component {
   state={
     loading:true
@@ -41,17 +50,17 @@ class App extends Component {
     )
     let routes = (
       <Switch>
-        <Route path="/search" component={this.state.loading ? () =>  spinner : Search} />
-        <Route path="/" component={this.state.loading ? () => spinner : Home}/>
+        <Route path="/search" component={this.state.loading ? () =>  spinner : asyncSearch} />
+        <Route path="/" component={this.state.loading ? () => spinner : asyncHome}/>
       </Switch>
     )
     if(this.props.isAuthenticated){
       routes = (
         <Switch>
-          <Route path="/showbookings" component={ShowBookings} />
-          <Route path="/booknow/:id" component={this.state.loading ? () =>  spinner : BookingsTickets} />
-          <Route path="/search" component={this.state.loading ? () =>  spinner : Search} />
-          <Route path="/" exact component={this.state.loading ? () => spinner : Home}/>
+          <Route path="/showbookings" component={asyncShowBookings} />
+          <Route path="/booknow/:id" component={this.state.loading ? () =>  spinner : asyncBooking} />
+          <Route path="/search" component={this.state.loading ? () =>  spinner : asyncSearch} />
+          <Route path="/" exact component={this.state.loading ? () => spinner : asyncHome}/>
         </Switch>
       );
     }
