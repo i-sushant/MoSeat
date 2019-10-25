@@ -151,11 +151,9 @@ const Home = (props) => {
               <span/>
               <span/>
               <div className={classes.content}>
-                <h2>Easy Tutorial</h2>
+                <h2>Easy Bookings</h2>
                 <p>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                  sunt ad incidunt molestias dolorum! Quod quas aperiam voluptatum
-                  quisquam nostrum?
+                  Hassle free bookings for your journey. We care for your convenence
                 </p>
                 <a href="/">Read More</a>
               </div>
@@ -176,11 +174,9 @@ const Home = (props) => {
             <span />
             <span />
             <div className={classes.content}>
-              <h2>Easy Tutorial</h2>
+              <h2>Top Reviews</h2>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                sunt ad incidunt molestias dolorum! Quod quas aperiam voluptatum
-                quisquam nostrum?
+                We are rated as the best in the industry for ticket bookings.
               </p>
 
               <a href="/">Read More</a>
@@ -202,13 +198,10 @@ const Home = (props) => {
             <span />
             <span />
             <div className={classes.content}>
-              <h2>Easy Tutorial</h2>
+              <h2>Best in class experts</h2>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                sunt ad incidunt molestias dolorum! Quod quas aperiam voluptatum
-                quisquam nostrum?
+                We are a team of enthusiasts always trying to improve our application and providing new features for consumers like you.
               </p>
-
               <a href="/">Read More</a>
             </div>
           </div>
