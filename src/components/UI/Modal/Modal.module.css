@@ -2,13 +2,14 @@
     position: fixed;
     z-index: 500;
     background-color: white;
-    width: 70%;
+    width: 40%;
     height:auto;
     border: 1px solid rgb(70, 65, 65);
     box-shadow: 1px 1px 1px black;
     padding: 16px;
-    left: 15%;
-    top:8%;
+    right: 50%;
+    top:50%;
+    transform:translate(50%,-50%);
     box-sizing: border-box;
     transition: all 0.3s ease-out;
 }
@@ -21,36 +22,36 @@
 @keyframes modalOpen{
     0%{
         opacity:0;
-        transform:translateY(-100vh);
+        top:0%;
+        transform:translateY(50%, -100%);
     }
     50%{
        opacity:1;
-       transform:translateY(10%);
+       transform:translate(50%,-20%);
     }
     100%{
         opacity: 1;
-        transform: translateY(0);
+        transform:translate(50%, -50%);
     }
 }
 @keyframes modalClose {
     0% {
         opacity: 1;
-        transform: translateY(0);
+        transform:translate(50%, -50%);
     }
 
     50% {
         opacity: 0.8;
-        transform: translateY(10%);
+        transform:translate(50%, -30%);
     }
 
     100% {
         opacity:0;
-        transform: translateY(-100vh);
+        transform: translateY(50%, -100%);
     }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 400px) {
     .Modal {
-        width: 100%;
-        left:calc(50% - 189px)
+        width: 90%;
     }
 }
