@@ -46,7 +46,7 @@ const SearchBar = (props) => {
                     <span className={classes.focus_border}/>
                 </div>
                 <div className={classes.search_btn}>
-                    <Link 
+                    <Link disabled
                     to={'/search?source='+props.source+"&destination="+props.destination}
                     className={classes.searchbutton}
                     onClick={props.searchHandler}>

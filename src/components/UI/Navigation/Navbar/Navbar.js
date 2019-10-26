@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBus } from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom'
 const Navbar = (props) => {
-    let bookings = null;
     let logout = null;
     if(props.isAuthenticated){
         logout = (

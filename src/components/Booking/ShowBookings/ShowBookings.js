@@ -9,9 +9,9 @@ const ShowBookings = (props) => {
         bookings = <Spinner />
     }
     if(props.fetchedBookings.length >= 1){
-        bookings = props.fetchedBookings.reverse().map(booking => {
+        bookings = props.fetchedBookings.reverse().map((booking,index) => {
             return (
-                <div className={classes.result_card}>
+                <div className={classes.result_card} key={index}>
                         <div>
                             <h4>Journey Date</h4>
                             <h4>{booking.journeyDate.substring(0,15)}</h4>

@@ -5,7 +5,6 @@ import Footer from '../UI/Navigation/Footer/Footer'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBus,
-  faExchangeAlt,
   faBusinessTime,
   faAddressBook,
   faUsers
@@ -41,21 +40,12 @@ const Home = (props) => {
         </li>
     )
   }
-  // console.log(props.loginDetails.name);
-  // if(props.isAuthenticated){
-  //   name = "Welcome " + props.loginDetails.name
-  // }
   return (
     <div className={classes.home}>
       <header>
         <div className={classes.pic}>
           <nav>
             <ul>
-              <li>
-                <a href="/">
-                  <strong>Home</strong>
-                </a>
-              </li>
               <li>
                 <a href="/search">
                   <strong>Search</strong>
@@ -76,59 +66,6 @@ const Home = (props) => {
             </h3>
           </div>
           <SearchBar {...props}/>
-          {/* <form onSubmit={props.searchHandler} className={classes.row}>
-              <div className={classes.col_3}>
-                <p>From</p>
-                <input
-                  className={classes.effect_1}
-                  type="text"
-                  name="source"
-                  placeholder="Eg. Pune"
-                  value={props.source}
-                  onChange={(event) => props.fieldChanged(event)}
-                />
-                <span className={classes.focus_border} />
-              </div>
-              <div className={classes.col_6}>
-                <h2>
-                  <FontAwesomeIcon icon={faExchangeAlt} className={classes.swap} onClick={props.switchRoute}/>
-                </h2>
-              </div>
-              <div className={classes.col_4}>
-                <p>To</p>
-                <input
-                  className={classes.effect_1}
-                  type="text"
-                  name="destination"
-                  placeholder="Eg Mumbai"
-                  value={props.destination}
-                  onChange={(event) => props.fieldChanged(event)}
-                />
-                <span className={classes.focus_border} />
-              </div>
-              <div className={classes.col_5}>
-                <p>Date</p>
-                <input
-                  className={classes.effect_1}
-                  type="date"
-                  name="journeyDate"
-                  value={props.journeyDate}
-                  onChange={(event) => props.fieldChanged(event)}
-                />
-                <span className={classes.focus_border} />
-              </div>
-              <div className={classes.col_7}>
-                <Link
-                  className={classes.example_a}
-                  to={'/search?source='+props.source+"&destination="+props.destination}
-                  target="_blank"
-                  rel="nofollow noopener"
-                  onClick={props.searchHandler}
-                >
-                  SEARCH
-                </Link>
-              </div>
-          </form> */}
         </div>
       </header>
       <div className={classes.flex_container}>
