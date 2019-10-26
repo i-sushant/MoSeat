@@ -40,6 +40,13 @@ const ShowBookings = (props) => {
             )
         })
     }
+    if(props.fetchError){
+        bookings = (
+            <div>
+                <h3>{props.fetchError}</h3>
+            </div>
+        )
+    }
     return (
         <div>
             <Navbar />

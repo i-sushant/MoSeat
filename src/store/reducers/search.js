@@ -64,6 +64,16 @@ const searchBusesFail = (state,action) => {
     }
     return updateObject(state,updatedState);
 }
+const setField = (state, action) => {
+    const formatDate = action.journeyDate.split('-');
+    const journeyDate = [formatDate[2], formatDate[1], formatDate[0]].join('-')
+    const updatedState = {
+        source: action.source,
+        destination: action.destination,
+        journeyDate: journeyDate
+    }
+    return updateObject(state, updatedState);
+}
 const reducer = (state= initialState, action) => {
     switch(action.type){
         case actionTypes.SOURCE_UPDATE : return addSource(state,action);
@@ -72,6 +82,7 @@ const reducer = (state= initialState, action) => {
         case actionTypes.SEARCH_BUSES_SUCCESS :return updateSearchData(state,action);
         case actionTypes.SEARCH_BUSES_FAIL:return searchBusesFail(state,action);
         case actionTypes.SEARCH_BUSES_START: return startSearch(state, action);
+        case actionTypes.SET_FIELD_FOR_SEARCH: return setField(state,action);
         default: return state;
     }
 }

@@ -2,7 +2,26 @@ import React from 'react';
 import classes from './Booking.module.css';
 import Navbar from '../UI/Navigation/Navbar/Navbar';
 import Footer from '../UI/Navigation/Footer/Footer';
+import Spinner from '../UI/Spinner/Spinner';
 const Booking = (props) => {
+    let bookingOn = (
+        <>
+            <h4>Bus number : 15</h4>
+            <h4>Journey Date: {props.journeyDate}</h4>
+            <h4 style={{'textTransform':'capitalize'}}>Source : {props.source}</h4>
+            <h4 style={{'textTransform':'capitalize'}}>Destination : {props.destination}</h4>
+            <h4>Passenger name : {props.passengerName}</h4>
+            <h4>Total Seats : {props.totalSeats}</h4>
+            <h4>Total Price : {props.totalPrice ? props.totalPrice : null}</h4>
+            <button className={classes.button} onClick={props.submitHandler}>BOOK NOW !</button>
+        </>
+    )
+    if(props.loading){
+        bookingOn = <Spinner />
+    }
+    if(props.error){
+        bookingOn = <h4 style={{'color':'black','textAlign':'center'}}>{props.error}</h4>
+    }
     return (
         <div>
             <Navbar />
@@ -23,16 +42,9 @@ const Booking = (props) => {
                 </div>
                 <div className={classes.booking_summary_container}>
                     <div className={classes.header}>
-                       <h3>Booking Summary</h3>
+                        <h3>Booking Summary</h3>
                     </div>
-                    <h4>Bus number : 15</h4>
-                    <h4>Journey Date: {props.journeyDate}</h4>
-                    <h4 style={{'textTransform':'capitalize'}}>Source : {props.source}</h4>
-                    <h4 style={{'textTransform':'capitalize'}}>Destination : {props.destination}</h4>
-                    <h4>Passenger name : {props.passengerName}</h4>
-                    <h4>Total Seats : {props.totalSeats}</h4>
-                    <h4>Total Price : {props.totalPrice ? props.totalPrice : null}</h4>
-                    <button onClick={props.submitHandler}>BOOK NOW !</button>
+                    {bookingOn}
                 </div>
             </div>
             <Footer />

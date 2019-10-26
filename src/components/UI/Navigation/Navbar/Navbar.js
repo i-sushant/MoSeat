@@ -4,13 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBus } from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom'
 const Navbar = (props) => {
-    let name = null;
+    let bookings = null;
     let logout = null;
     if(props.isAuthenticated){
-        name=(
+        bookings=(
             <li>
-                <Link to={'/search'} >
-                    <strong>{props.name}</strong>
+                <Link to={'/showbookings'} >
+                    <strong>My Bookings</strong>
                 </Link>
             </li>
         )
@@ -33,30 +33,15 @@ const Navbar = (props) => {
                         icon={faBus}
                         style={{ "fontSize": "40px" }}
                         />
-                        MO<span>Seat</span>
+                        <a href="/">MO<span>Seat</span></a>
                         </h3>
                     </div>
-                    <li>
-                        <a href="/">
-                        <strong>Home</strong>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/">
-                        <strong>About</strong>
-                        </a>
-                    </li>
                     <li>
                         <a href="/search">
                         <strong>Search</strong>
                         </a>
                     </li>
-                    <li>
-                        <a href="/">
-                        <strong>Contact</strong>
-                        </a>
-                    </li>
-                    {name}
+                    {bookings}
                     {logout}
                     </ul>
                 </nav>

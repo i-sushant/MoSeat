@@ -9,7 +9,7 @@ class ShowBookings extends Component {
     render() {
         return (
             <div>
-               <ShowBooking fetchedBookings= {this.props.fetchedBookings} loading={this.props.loading}/> 
+               <ShowBooking fetchedBookings= {this.props.fetchedBookings} loading={this.props.loading} fetchError={this.props.fetchError}/> 
             </div>
         )
     }
@@ -17,7 +17,8 @@ class ShowBookings extends Component {
 const mapStateToProps = state => {
     return {
         fetchedBookings : state.booking.bookings,
-        loading:state.booking.loading
+        loading:state.booking.loading,
+        fetchError:state.booking.fetchError
     }
 }
 const mapDispatchToProps = dispatch => {

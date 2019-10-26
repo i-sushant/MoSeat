@@ -9,6 +9,7 @@
   display: flex;
   height: 5em;
   padding-left: 2%;
+  padding-right: 2%;
   background: linear-gradient(
     90deg,
     rgba(94, 1, 1, 0.993) 0%,
@@ -121,11 +122,43 @@
   letter-spacing: 1px;
   transition: all 0.4s ease 0s;
 }
+@media screen and (max-width:576px){
+  .search_container{
+    flex-direction: column;
+    height: auto;
+    background: linear-gradient(180deg,
+      rgba(94, 1, 1, 0.993) 0%,
+      rgba(94, 1, 1, 0.993) 25%,
+      rgba(94, 1, 1, 0.993) 75%,
+      rgba(94, 1, 1, 0.582) 100%);
+    padding: 2% 0;
+  }
+  .source_container,
+  .destination_container,
+  .journey_date_container{
+    width:90%;
+    height:25%;
+  }
+  .journey_date_container{
+    margin:2% 0 5% 0;
+  }
+  .exchange_icon{
+    margin:5% 0;
+    width: 90%;
+  }
+  .icon_exchange{
+    transform: rotate(90deg);
+  }
+  .search_btn{
+    width:60%;
+    margin-right:10%;
+    margin-bottom: 2%;
+  }
+}
 .timings {
   height: 5.5em;
   box-shadow: 4px 8px 8px 4px rgba(0, 0, 0, 0.2);
   background-color: #fff;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -134,6 +167,7 @@
 .timings p {
   color: #530806;
 }
+
 .time {
   color: #530806;
   font-family: sans-serif;
@@ -141,7 +175,9 @@
   margin-right: 2.5%;
   margin-top: 1%;
 }
-
+.buttons{
+  width:50%
+}
 .button {
   background-color: #ed3330; /* Green */
   border: none;
@@ -568,4 +604,17 @@
 .closebtn2:hover {
   cursor: pointer;
 }
-
+@media screen and (max-width:576px){
+  .timings{
+    height:auto;
+    overflow: hidden;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: space-evenly;
+  }
+}

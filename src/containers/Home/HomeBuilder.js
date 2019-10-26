@@ -34,7 +34,8 @@ class HomeBuilder extends Component {
   authCancelHandler =() => {
     this.setState({
       authClicked:!this.state.authClicked
-    })
+    });
+    this.props.authCancel();
   }
   searchHandler = event => {
     event.preventDefault();  
@@ -47,19 +48,17 @@ class HomeBuilder extends Component {
     this.props.onDestinationChanged(this.state.destination);
     this.props.onJourneyDateChanged(this.state.journeyDate);
     this.props.searchBuses(queryObject);
-    const search = {
-      source: this.state.source,
-      destination: this.state.destination,
-      journeyDate: this.state.journeyDate
-    }
-    this.props.history.push('/search?source='+search.source+'&destination='+search.destination+"&journeyDate="+search.journeyDate);
+    this.setFieldForSearch(queryObject.source, queryObject.destination, queryObject.journeyDate);
+    this.props.history.push('/search?source=' + queryObject.source + '&destination=' + queryObject.destination + "&journeyDate=" + queryObject.journeyDate);
   }
-    
+    setFieldForSearch = (source, destination, journeyDate) => {
+      this.props.setField(source, destination,journeyDate);
+    }
     render() {
       let Authorize = (
         <Aux>
-            {this.props.error? <h5>{this.props.error}</h5> : null}
-            <Auth authStart = {this.props.authStart}/>
+            <Auth authStart = {this.props.authStart}
+                  error={this.props.error}/>
         </Aux>
       )
         return (
@@ -97,7 +96,9 @@ const mapDispatchToProps = dispatch => {
     onJourneyDateChanged: (journeyDate) => dispatch(actions.addJourneyDate(journeyDate)),
     searchBuses: (searchData) => dispatch(actions.searchBuses(searchData)),
     logout:() => dispatch(actions.logout()),
-    authStart:() => dispatch(actions.authStart())
+    authStart:() => dispatch(actions.authStart()),
+    authCancel:() => dispatch(actions.authCancel()),
+    setField: (source, destination, journeyDate) => dispatch(actions.setFieldForSearch(source, destination, journeyDate))
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(HomeBuilder);

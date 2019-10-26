@@ -1,6 +1,15 @@
 import * as actionTypes from '../actions/actionTypes';
 import axios from '../../axios-base'
 
+export const setFieldForSearch = (source, destination, journeyDate) => {
+    return {
+        type: actionTypes.SET_FIELD_FOR_SEARCH,
+        source: source,
+        destination: destination,
+        journeyDate: journeyDate
+        
+    }
+}
 export const addSource = (source) => {
     return {
         type:actionTypes.SOURCE_UPDATE,
@@ -48,12 +57,11 @@ export const searchBuses = (searchParams) => {
                     dispatch(searchBusesSuccess(response.data.buses));
                 else {
                     dispatch(searchBusesFail(response.data.error))
-                }
-                    
+                }      
             })
             .catch(error => {
                 console.log(error);
-                dispatch(searchBusesFail(error));
+                dispatch(searchBusesFail(error.message));
             })
     }
 }

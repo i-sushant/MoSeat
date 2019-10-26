@@ -53,7 +53,7 @@ class Booking extends Component {
             busId:this.props.busId
         }
         this.props.bookNow(bookingData);
-        this.props.history.push('/');
+        setTimeout(() => this.props.booked ? this.props.history.push('/') : null, 2000);
     } 
     render() {
         
@@ -70,7 +70,10 @@ class Booking extends Component {
                                 source={this.props.source}
                                 destination={this.props.destination}
                                 totalPrice={this.props.totalPrice}
-                                journeyDate={this.props.journeyDate}/>
+                                journeyDate={this.props.journeyDate}
+                                loading={this.props.loading}
+                                error={this.props.error}
+                                booked={this.props.booked}/>
             </div>
         )
     }
@@ -85,7 +88,9 @@ const mapStateToProps = state => {
         name:state.booking.name,
         totalSeats:state.booking.totalSeats,
         totalPrice:state.booking.totalPrice,
-        booked:state.booking.booked
+        booked:state.booking.booked,
+        loading:state.booking.loading,
+        error:state.booking.bookError
     }
 }
 const mapDispatchToProps = dispatch => {

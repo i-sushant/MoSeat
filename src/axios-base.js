@@ -1,6 +1,7 @@
 import axios from 'axios'
-
+//const developmentUrl = 'http://localhost:3002/';
+const productionUrl = 'https://peaceful-waters-64481.herokuapp.com/'
 const instance = axios.create({
-    baseURL: 'https://peaceful-waters-64481.herokuapp.com/'
+    baseURL: productionUrl
 })
 export default instance

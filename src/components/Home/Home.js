@@ -57,11 +57,6 @@ const Home = (props) => {
                 </a>
               </li>
               <li>
-                <a href="/">
-                  <strong>About</strong>
-                </a>
-              </li>
-              <li>
                 <a href="/search">
                   <strong>Search</strong>
                 </a>
@@ -70,17 +65,17 @@ const Home = (props) => {
               {authentication}
             </ul>
           </nav>
+          <div className={classes.companylogo}>
+            <h3>
+              <FontAwesomeIcon
+                icon={faBus}
+                size="lg"
+                style={{ "fontSize": "80px" }}
+              />
+              MO<span>Seat</span>
+            </h3>
+          </div>
           <form onSubmit={props.searchHandler} className={classes.row}>
-              <div className={classes.col_8}>
-                <h3>
-                  <FontAwesomeIcon
-                    icon={faBus}
-                    size="lg"
-                    style={{ "fontSize": "80px" }}
-                  />
-                  MO<span>Seat</span>
-                </h3>
-              </div>
               <div className={classes.col_3}>
                 <p>From</p>
                 <input
@@ -153,7 +148,7 @@ const Home = (props) => {
               <div className={classes.content}>
                 <h2>Easy Bookings</h2>
                 <p>
-                  Hassle free bookings for your journey. We care for your convenence
+                  Hassle free bookings for your journey. We care for your convenience
                 </p>
                 <a href="/">Read More</a>
               </div>

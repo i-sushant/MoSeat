@@ -3,7 +3,8 @@ import axios from '../../axios-base'
 import jwt_decode from 'jwt-decode';
 export const authStart = () => {
     return {
-        type: actionTypes.AUTH_START
+        type: actionTypes.AUTH_START,
+        error:null
     }
 }
 export const authReady = () => {
@@ -24,6 +25,11 @@ export const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
         error: error
+    }
+}
+export const authCancel = () => {
+    return {
+        type:actionTypes.AUTH_CANCEL
     }
 }
 export const logout = () => {
@@ -67,18 +73,22 @@ export const auth = (email, password,phoneNumber,firstName,lastName, isSignup) =
         };
         axios.post(url, authData)
              .then(response => {
-                const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-                const decoded = jwt_decode(response.data.token.split(' ')[1]);
-                localStorage.setItem('token', response.data.token);
-                localStorage.setItem('expirationDate', expirationDate)
-                localStorage.setItem('userId', decoded.id);
-                localStorage.setItem('name',decoded.name)
-                localStorage.setItem('email', decoded.email);
-                dispatch(authSuccess(response.data.token, decoded.id, decoded.name, decoded.email));
-                dispatch(checkAuthTimeout(response.data.expiresIn))
+                 if(response.data.success){
+                    const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+                    const decoded = jwt_decode(response.data.token.split(' ')[1]);
+                    localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('expirationDate', expirationDate)
+                    localStorage.setItem('userId', decoded.id);
+                    localStorage.setItem('name', decoded.name)
+                    localStorage.setItem('email', decoded.email);
+                    dispatch(authSuccess(response.data.token, decoded.id, decoded.name, decoded.email));
+                    dispatch(checkAuthTimeout(response.data.expiresIn))
+                 } else {
+                     dispatch(authFail(response.data.message))
+                 }
             })
             .catch(err => {
-                dispatch(authFail(err));
+                dispatch(authFail(err.message));
             })
     }
 }

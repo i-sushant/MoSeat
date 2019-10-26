@@ -5,7 +5,6 @@ import {faBus} from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import Modal from '../../components/UI/Modal/Modal'
 class Auth extends Component {
     constructor(props){
         super(props);
@@ -114,7 +113,8 @@ class Auth extends Component {
                         <FontAwesomeIcon icon={faBus} style={{'fontSize':'40px','marginTop':'1%'}}/>
                         <h3>MO<span>SEAT</span></h3>
                     </div>
-                    <h4 style={{'fontFamily':'Roboto', 'textAlign':'center','fontSize':'25px','marginBottom':'5%'}}>{welcomeMessage}</h4>
+                    <h4 style={{'fontFamily':'Roboto', 'textAlign':'center','fontSize':'25px','marginBottom':'2%','marginTop':'2%'}}>{welcomeMessage}</h4>
+                    <h4>{this.props.error ? this.props.error : null}</h4>
                     {form}
                     {joinUsMessage}
             </div>
@@ -123,13 +123,13 @@ class Auth extends Component {
             authForm = <Spinner />  
             setTimeout(this.props.authReady,1000); 
         }
-        if(this.props.error){
-            authForm = (
-                <Modal show={this.props.error !== ''} modalClosed={this.authCancelHandler}>
-                    <h4>{this.props.error}</h4>
-                </Modal>
-            )
-        }
+        // if(this.props.error){
+        //     authForm = (
+        //         <Modal show={this.props.error !== ''} modalClosed={this.authCancelHandler}>
+        //             <h4>{this.props.error}</h4>
+        //         </Modal>
+        //     )
+        // }
         return (
             <div>
                 {authForm}

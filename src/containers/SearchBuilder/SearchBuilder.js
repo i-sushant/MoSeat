@@ -38,10 +38,10 @@ class SearchBuilder extends Component {
         this.props.onJourneyDateChanged(this.state.journeyDate);
         this.props.searchBusesStart();
         setTimeout(() =>  this.props.searchBuses(queryObject), 1500);
-        this.props.history.push('/search?source=' + this.state.source + '&destination=' + this.state.destination);
+        this.props.history.push('/search?source=' + this.state.source + '&destination=' + this.state.destination +'&journeyDate=' + this.state.journeyDate);
     }
     setFieldForBooking = (busId, source, destination,basePrice) => {
-        this.props.setFieldForBooking(busId, source, destination, this.state.journeyDate, basePrice);
+        this.props.setFieldForBooking(busId, source, destination, this.state.journeyDate ? this.state.journeyDate : this.props.journeyDate, basePrice);
     }
     render() {
         return (

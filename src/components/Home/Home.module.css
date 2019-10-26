@@ -52,11 +52,16 @@
   background: rgba(22, 20, 20, 0.568);
   color: #ffcdd2;
 }
+.companylogo{
+  top:50%;
+  left:40%;
+  transform: translate(7%,80%);
+}
 .row {
   width: 85%;
   height: 13%;
   background: #fff;
-  margin-top: 15%;
+  margin-top: 6%;
   margin-left: 7%;
   position: relative;
   border-radius: 5px 5px 5px 5px;
@@ -70,7 +75,7 @@ p {
 }
 .col_8 {
   /* float: ; */
-  width: 27.33%;
+  width: 20%;
   /* margin: 50px 5%;  */
   margin-top: -10%;
   margin-left: -1%;
@@ -81,7 +86,7 @@ h3 {
 }
 .col_3 {
   /* float: ; */
-  width: 27.33%;
+  width: 25%;
   /* margin: 50px 5%;  */
   margin-top: -1%;
   margin-left: 2%;
@@ -89,7 +94,7 @@ h3 {
 }
 .col_4 {
   /* float: ; */
-  width: 27.33%;
+  width: 25%;
   /* margin: 50px 5%;  */
   margin-top: -1%;
   margin-left: 30%;
@@ -97,7 +102,7 @@ h3 {
 }
 .col_6 {
   /* float: ; */
-  width: 27.33%;
+  width: 25%;
   /* margin: 50px 5%;  */
   margin-top: 1%;
   margin-left: 25%;
@@ -108,7 +113,7 @@ h3 {
 }
 .col_5 {
   /* float: ; */
-  width: 27.33%;
+  width: 25%;
   /* margin: 50px 5%;  */
   margin-top: -1%;
   margin-left: 53%;
@@ -124,11 +129,9 @@ h3 {
   margin-top: -10%;
 }
 .col_7 {
-  /* float: ; */
-  width: 27.33%;
-  /* margin: 50px 5%;  */
+  width: 25%;
   margin-top: 1%;
-  margin-left: 80%;
+  margin-left: 77%;
   position: absolute;
 }
 /* necessary to give position: relative to parent. */
@@ -643,7 +646,14 @@ h3 span {
   margin-right: 3px;
   margin-bottom: 5px;
 }
-
+@media screen and (max-width: 576px) {
+  .row{
+    width:90%;
+    top:50%;
+    left:50%;
+    transform: translate(-60%,-300%);
+  }
+}
 @media (max-width: 880px) {
   .footer_distributed {
     font: bold 14px sans-serif;

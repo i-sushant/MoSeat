@@ -38,25 +38,33 @@ export const bookingInit = (bookingData) => {
         ...bookingData
     }
 }
+export const bookingStart = () => {
+    return {
+        type:actionTypes.BOOKING_START
+    }
+}
 export const bookingSuccess = (bookingData) => {
     return {
         type:actionTypes.BOOKING_SUCCESS,
         bookingData:bookingData
     } 
 }
-export const bookingFail = () => {
+export const bookingFail = (error) => {
     return {
-        type:actionTypes.BOOKING_FAIL
+        type:actionTypes.BOOKING_FAIL,
+        error:error
     }
 }
 export const bookNow = (bookingData) => {
     return dispatch => {
+        dispatch(bookingStart());
         axios.post('/bookings/new', bookingData)
             .then(response => {
                dispatch(bookingSuccess(response.data));
             })
             .catch(error => {
-                dispatch(bookingFail());
+                console.log(error.message)
+                dispatch(bookingFail(error.message));
             })
     }
 }
@@ -71,9 +79,10 @@ export const fetchBookingsSuccess = (fetchedBookings) => {
         bookings: fetchedBookings
     }
 }
-export const fetchBookingsFailure = () => {
+export const fetchBookingsFailure = (error) => {
     return {
-        type:actionTypes.FETCH_BOOKINGS_FAIL
+        type:actionTypes.FETCH_BOOKINGS_FAIL,
+        error:error
     }
 }
 export const fetchBookings = () => {
@@ -84,7 +93,8 @@ export const fetchBookings = () => {
                 dispatch(fetchBookingsSuccess(response.data.bookings));
             })
             .catch(error => {
-                dispatch(fetchBookingsFailure());
+                console.log(error.message)
+                dispatch(fetchBookingsFailure(error.message));
             })
     }
 }

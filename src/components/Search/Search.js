@@ -50,6 +50,9 @@ const Search = (props) =>  {
             </div>)
     });
   }
+  if(props.error){
+    results = <h3 style={{'color':'black'}}>{props.error}</h3>
+  }
     return (
       <div className={classes.main_container}>
         <Navbar {...props}/>
@@ -67,7 +70,7 @@ const Search = (props) =>  {
             <span className={classes.focus_border} />
           </div>
           <div className={classes.exchange_icon}>
-            <FontAwesomeIcon icon={faExchangeAlt} style={{'color':'#ffffff','fontSize':'25px'}} onClick={props.switchRoute}/>
+            <FontAwesomeIcon icon={faExchangeAlt} style={{'color':'#ffffff','fontSize':'25px'}} className={classes.icon_exchange} onClick={props.switchRoute}/>
           </div>
           <div className={classes.destination_container}>
             <label>To</label>
@@ -108,9 +111,9 @@ const Search = (props) =>  {
           <div className={classes.in}/>
         </div>
         <div className={classes.timings}>
-          <span className={classes.time}>
+          <div className={classes.time}>
             Timings <FontAwesomeIcon icon={faClock} />
-          </span>
+          </div>
           <div className={classes.buttons}>
             <button className={[classes.button ,classes.button1].join(' ')}>5AM TO 12PM</button>
             <button className={[classes.button ,classes.button2].join(' ')}>12PM TO 5PM</button>

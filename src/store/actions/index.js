@@ -4,7 +4,8 @@ export {
     setAuthRedirectPath,
     authCheckState,
     authStart,
-    authReady
+    authReady,
+    authCancel
 }
 from './auth'
 
@@ -22,6 +23,7 @@ export {
     searchBuses,
     addDestination,
     addSource,
+    setFieldForSearch,
     addJourneyDate,
     searchBusesStart,
     searchBusesFail

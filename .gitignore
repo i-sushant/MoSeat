@@ -10,8 +10,7 @@
 /coverage
 
 # development
-/src/
-/public/
+/build
 # misc
 .DS_Store
 .env.local
