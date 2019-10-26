@@ -19,9 +19,6 @@ const Booking = (props) => {
     if(props.loading){
         bookingOn = <Spinner />
     }
-    if(props.error){
-        bookingOn = <h4 style={{'color':'black','textAlign':'center'}}>{props.error}</h4>
-    }
     return (
         <div>
             <Navbar type="Booking"/>

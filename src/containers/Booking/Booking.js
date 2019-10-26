@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import BookingTickets from '../../components/Booking/Booking'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
-
+import Modal from '../../components/UI/Modal/Modal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-regular-svg-icons'
 class Booking extends Component {
     state= {
         name:'',
@@ -11,9 +13,14 @@ class Booking extends Component {
         totalSeats:'',
         busNumber:'',
         totalPrice:0,
-        seatValue:0    
+        seatValue:0,
+        closeModal:false 
     }
-
+    closeModal = () => {
+        this.setState({
+            closeModal : !this.state.closeModal
+        });
+    }
     decreaseSeat = () => {
         console.log("Decrease Seat")
         this.props.removeSeat()
@@ -53,12 +60,46 @@ class Booking extends Component {
             busId:this.props.busId
         }
         this.props.bookNow(bookingData);
-        setTimeout(() => this.props.booked ? this.props.history.push('/') : null, 2000);
-    } 
-    render() {
         
+    } 
+    bookingForward = () => this.props.history.push('/') ;
+    render() {
+        if(this.state.closeModal){
+            this.props.history.push('/');
+        }
+        const styles = {
+            main : {
+                'display':'flex',
+                'flexDirection':'column',
+                'color':'black',
+                'justifyContent':'center',
+                'alignItems':'center'
+            },
+            goBack : {
+                'width':'10em',
+                'height':'4em',
+                'border':'none',
+                'outline':'none',
+                'backgroundColor': this.props.booked ? '#4caf50' : '#ed3330',
+                'color':'white',
+                'borderRadius':'4px',
+                'fontSize':'0.9em'
+            },
+            icon:{
+               'fontSize': '6em', 
+               'color': this.props.booked ? '#4caf50' : '#ed3330', 
+               'backgroundColor': 'white'
+            }
+        }
         return (
             <div>
+                <Modal show={!this.state.closeModal && (this.props.booked || this.props.error !== '')} modalClosed={this.closeModal}>
+                    <div style={styles.main}>
+        {this.props.booked ? <FontAwesomeIcon icon={faCheckCircle} style={styles.icon}/> : <FontAwesomeIcon icon={faTimesCircle} style={styles.icon}/> }
+                        <h2 style={{'fontSize':'25px','color':'#000'}}>{this.props.booked ? 'Booking Successful' : this.props.error ? this.props.error : 'Booking Failed'}</h2>
+                        <button style={styles.goBack} onClick={this.bookingForward}>Go to Homepage</button>
+                    </div>
+                </Modal>
                 <BookingTickets decreaseSeat={this.decreaseSeat}
                                 increaseSeat={this.increaseSeat}
                                 seatValue={this.state.seatValue}

@@ -60,7 +60,10 @@ export const bookNow = (bookingData) => {
         dispatch(bookingStart());
         axios.post('/bookings/new', bookingData)
             .then(response => {
-               dispatch(bookingSuccess(response.data));
+                if(response.data.success)
+                     dispatch(bookingSuccess(response.data.bookingData));
+                else 
+                    dispatch(bookingFail(response.data.message))
             })
             .catch(error => {
                 console.log(error.message)
