@@ -75,7 +75,7 @@ const Home = (props) => {
               MO<span>Seat</span>
             </h3>
           </div>
-          <SearchBar />
+          <SearchBar {...props}/>
           {/* <form onSubmit={props.searchHandler} className={classes.row}>
               <div className={classes.col_3}>
                 <p>From</p>

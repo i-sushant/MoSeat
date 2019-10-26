@@ -25,7 +25,7 @@ document.body.style.padding = 0;
 const app = (
   <Provider store={store}>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <App />
+        <App class/>
       </BrowserRouter>
   </Provider>   
 )

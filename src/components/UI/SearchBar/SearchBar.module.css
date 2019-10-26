@@ -1,5 +1,5 @@
 .search_container {
-    width: 80%;
+    width: 85%;
     margin: 0 auto;
     margin-top:7%;
     display: flex;
@@ -44,8 +44,9 @@
 }
 
 .search_btn {
-    width: 14%;
+    width: 14%;   
 }
+
 .search_container input[type="number"] {
     font: 15px/24px "Lato", Arial, sans-serif;
     color: grey;
@@ -127,6 +128,15 @@
         width:90%;
         margin-top:25%;
     }
+    .exchange_icon{
+        margin-right: 5%;
+        font-size: 0.8em;
+    }
+     .source_container,
+     .destination_container,
+     .journey_date_container {
+         width:23%;
+     }
 }
 /* 
 @media screen and (max-width:576px) {

@@ -23,6 +23,7 @@ class App extends Component {
   }
   componentDidMount(){
     setTimeout(() => this.setState({ loading : false}), 1700)
+    //this.setState({ loading : false})
     this.props.onTryAutoSignUp();
     setAuthToken();
   } 

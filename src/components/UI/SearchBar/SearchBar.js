@@ -10,7 +10,7 @@ const SearchBar = (props) => {
                 <div className = { classes.source_container }>
                     <label>From</label>
                     <input
-                    placeholder="Enter source station"
+                    placeholder="Pune"
                     className={classes.effect_1}
                     type="text"
                     name="source"
@@ -20,12 +20,12 @@ const SearchBar = (props) => {
                     <span className={classes.focus_border} />
                 </div>
                 <div className={classes.exchange_icon}>
-                    <FontAwesomeIcon icon={faExchangeAlt} style={{'color':'#ffffff','fontSize':'25px'}} className={classes.icon_exchange} onClick={props.switchRoute}/>
+                    <FontAwesomeIcon icon={faExchangeAlt} style={{'color':'grey','fontSize':'1.5em'}} className={classes.icon_exchange} onClick={props.switchRoute}/>
                 </div>
                 <div className={classes.destination_container}>
                     <label>To</label>
                     <input
-                    placeholder="Enter destination station"
+                    placeholder="Mumbai"
                     className={classes.effect_1}
                     type="text"
                     name='destination'
