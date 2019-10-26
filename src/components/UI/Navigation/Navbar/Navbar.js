@@ -7,13 +7,6 @@ const Navbar = (props) => {
     let bookings = null;
     let logout = null;
     if(props.isAuthenticated){
-        bookings=(
-            <li>
-                <Link to={'/showbookings'} >
-                    <strong>My Bookings</strong>
-                </Link>
-            </li>
-        )
         logout = (
             <li>
                 <Link to={'/'} onClick={props.logout}>
@@ -37,11 +30,10 @@ const Navbar = (props) => {
                         </h3>
                     </div>
                     <li>
-                        <a href="/search">
-                        <strong>Search</strong>
+                        <a href={props.type === 'Search' ? '/showbookings' : '/search' }>
+                        <strong>{props.type === 'Search' ? 'My Bookings' : 'Search' }</strong>
                         </a>
                     </li>
-                    {bookings}
                     {logout}
                     </ul>
                 </nav>

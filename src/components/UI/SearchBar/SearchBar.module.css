@@ -77,7 +77,9 @@
     box-sizing: border-box;
     letter-spacing: 1px;
 }
-
+::placeholder{
+    font-size: 12px;
+}
 :focus {
     outline: none;
 }

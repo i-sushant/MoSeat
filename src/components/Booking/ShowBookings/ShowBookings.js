@@ -49,7 +49,7 @@ const ShowBookings = (props) => {
     }
     return (
         <div>
-            <Navbar />
+            <Navbar type="ShowBooking"/>
             <div className={classes.body_container}>
                 <h3>Mo<span style={{'color':'#ed3330'}}>Seats</span> </h3>
                 <div className={classes.line_separator}></div>

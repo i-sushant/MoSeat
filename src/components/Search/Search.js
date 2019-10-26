@@ -55,7 +55,7 @@ const Search = (props) =>  {
   }
     return (
       <div className={classes.main_container}>
-        <Navbar {...props}/>
+        <Navbar {...props} type="Search"/>
         <form className={classes.search_container} onSubmit={props.submitHandler}>
           < div className = { classes.source_container }>
             <label>From</label>

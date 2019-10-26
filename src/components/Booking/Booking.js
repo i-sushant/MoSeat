@@ -24,7 +24,7 @@ const Booking = (props) => {
     }
     return (
         <div>
-            <Navbar />
+            <Navbar type="Booking"/>
             <h3 style={{'color':'#530806','textAlign':'center','marginTop':'1.5%'}}>Booking Details</h3>
             <div className={classes.booking_container}>  
                 <div className={classes.form_container}>

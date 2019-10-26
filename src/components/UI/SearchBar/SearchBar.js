@@ -35,9 +35,8 @@ const SearchBar = (props) => {
                     <span className={classes.focus_border} />
                 </div>
                 <div className={classes.journey_date_container}>
-                    <label>Journey Date</label>
+                    <label>Date</label>
                     <input
-                    placeholder="Enter journey date"
                     className={classes.effect_1}
                     type="date"
                     name='journeyDate'

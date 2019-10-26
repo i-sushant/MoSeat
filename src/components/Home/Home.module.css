@@ -364,7 +364,7 @@ h2 {
 .card3 span {
   height: 100%;
   left: 0;
-  background: linear-gradient(rgba(16, 84, 185, 0.733), rgba(42, 55, 75, 0.596)), url('../../assets/coding.jpg');
+  background: linear-gradient(rgba(16, 84, 185, 0.733),rgba(16, 83, 185, 0.596)), url('../../assets/coding.jpg');
   position: absolute;
   transition: 1s;
   width: 100%;
