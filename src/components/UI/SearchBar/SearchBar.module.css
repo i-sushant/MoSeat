@@ -1,0 +1,169 @@
+.search_container {
+    width: 80%;
+    margin: 0 auto;
+    margin-top:7%;
+    display: flex;
+    height: 5em;
+    padding-left: 2%;
+    padding-right: 2%;
+    background: #fff;
+    align-items: center;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.source_container,
+.destination_container,
+.journey_date_container {
+    width: 25%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.journey_date_container input[type="date"] {
+    background:#fff;
+    width: 95%;
+    font: 15px/24px "Lato", Arial, sans-serif;
+    color: grey;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+}
+
+.search_container label {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: grey;
+    display: block;
+    font-size: 16px;
+}
+
+.exchange_icon {
+    width: 3%;
+}
+
+.search_btn {
+    width: 14%;
+}
+.search_container input[type="number"] {
+    font: 15px/24px "Lato", Arial, sans-serif;
+    color: grey;
+    background: #fff;
+    width: 15%;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    margin-top: 2%;
+    height: 20px;
+}
+
+:focus {
+    outline: none;
+}
+
+.search_container input[type="number"]::-webkit-inner-spin-button,
+.search_container input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.search_container input[type="text"] {
+    font: 15px/24px "Lato", Arial, sans-serif;
+    color: grey;
+    background:#fff;
+    width: 95%;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+}
+
+:focus {
+    outline: none;
+}
+
+.effect_1 {
+    border: 0;
+    padding: 7px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.effect_1~.focus_border {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ed3330;
+    transition: 0.4s;
+}
+
+.effect_1:focus~.focus_border {
+    width: 95%;
+    transition: 0.4s;
+}
+
+.searchbutton {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ed3330;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.searchbutton:hover {
+    background: #e4201d;
+    letter-spacing: 1px;
+    transition: all 0.4s ease 0s;
+}
+@media screen and (max-width:576px){
+    .search_container{
+        width:90%;
+        margin-top:25%;
+    }
+}
+/* 
+@media screen and (max-width:576px) {
+    .search_container {
+        flex-direction: column;
+        height: auto;
+        background: linear-gradient(180deg,
+                rgba(94, 1, 1, 0.993) 0%,
+                rgba(94, 1, 1, 0.993) 25%,
+                rgba(94, 1, 1, 0.993) 75%,
+                rgba(94, 1, 1, 0.582) 100%);
+        padding: 2% 0;
+    }
+
+    .source_container,
+    .destination_container,
+    .journey_date_container {
+        width: 90%;
+        height: 25%;
+    }
+
+    .journey_date_container {
+        margin: 2% 0 5% 0;
+    }
+
+    .exchange_icon {
+        margin: 5% 0;
+        width: 90%;
+    }
+
+    .icon_exchange {
+        transform: rotate(90deg);
+    }
+
+    .search_btn {
+        width: 60%;
+        margin-right: 10%;
+        margin-bottom: 2%;
+    }
+} */

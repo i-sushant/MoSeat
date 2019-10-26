@@ -10,7 +10,7 @@ import {
   faAddressBook,
   faUsers
 } from "@fortawesome/free-solid-svg-icons";
-
+import SearchBar from '../UI/SearchBar/SearchBar'
 
 const Home = (props) => {
   const callForAuth = () => {
@@ -75,7 +75,8 @@ const Home = (props) => {
               MO<span>Seat</span>
             </h3>
           </div>
-          <form onSubmit={props.searchHandler} className={classes.row}>
+          <SearchBar />
+          {/* <form onSubmit={props.searchHandler} className={classes.row}>
               <div className={classes.col_3}>
                 <p>From</p>
                 <input
@@ -127,7 +128,7 @@ const Home = (props) => {
                   SEARCH
                 </Link>
               </div>
-          </form>
+          </form> */}
         </div>
       </header>
       <div className={classes.flex_container}>
