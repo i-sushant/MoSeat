@@ -84,7 +84,6 @@ export const auth = (email, password,phoneNumber,firstName,lastName, isSignup) =
                     dispatch(authSuccess(response.data.token, decoded.id, decoded.name, decoded.email));
                     dispatch(checkAuthTimeout(response.data.expiresIn))
                  } else {
-                     console.log(response.data.message)
                      dispatch(authFail(response.data.message))
                  }
             })

@@ -58,7 +58,7 @@ const bookingSeatSuccess = (state, action) => {
         totalPrice: 0,
         basePrice: 0,
         busId: '',
-        bookings: state.booking.concat(bookingUpdate)
+        bookings: state.bookings.concat(bookingUpdate)
     })
 }
 
