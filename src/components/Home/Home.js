@@ -12,10 +12,6 @@ import {
 import SearchBar from '../UI/SearchBar/SearchBar'
 
 const Home = (props) => {
-  const callForAuth = () => {
-    props.handleAuthClicked();
-    props.logout();
-  }
   let authentication = (
     <li>
       <Link to={'/'} onClick={props.handleAuthClicked}>
@@ -34,7 +30,7 @@ const Home = (props) => {
   )
     authentication = (     
         <li>
-          <Link to={'/'} onClick={callForAuth}>
+          <Link to={'/'} onClick={props.authLogout}>
             <strong>Logout</strong>
           </Link>
         </li>

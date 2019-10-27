@@ -41,6 +41,8 @@ class SearchBuilder extends Component {
         this.props.history.push('/search?source=' + this.state.source + '&destination=' + this.state.destination +'&journeyDate=' + this.state.journeyDate);
     }
     setFieldForBooking = (busId, source, destination,basePrice) => {
+        this.props.bookingInit();
+        console.log(this.props.journeyDate);
         this.props.setFieldForBooking(busId, source, destination, this.state.journeyDate ? this.state.journeyDate : this.props.journeyDate, basePrice);
     }
     render() {
@@ -85,6 +87,7 @@ const mapDispatchToProps = dispatch => {
         searchBuses: (searchData) => dispatch(actions.searchBuses(searchData)),
         logout: () => dispatch(actions.logout()),
         searchBusesStart: () => dispatch(actions.searchBusesStart()),
+        bookingInit: () => dispatch(actions.bookingInit()),
         setFieldForBooking: (busId, source, destination, journeyDate, basePrice) => dispatch(actions.setField(busId, source, destination, journeyDate, basePrice))
     }
 }

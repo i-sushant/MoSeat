@@ -32,10 +32,9 @@ export const updateTotalPrice = () => {
         type:actionTypes.UPDATE_TOTAL_PRICE
     }
 }
-export const bookingInit = (bookingData) => {
+export const bookingInit = () => {
     return {
-        type:actionTypes.BOOKING_INIT,
-        ...bookingData
+        type: actionTypes.BOOKING_INIT
     }
 }
 export const bookingStart = () => {
@@ -57,13 +56,17 @@ export const bookingFail = (error) => {
 }
 export const bookNow = (bookingData) => {
     return dispatch => {
+        console.log(bookingData)
         dispatch(bookingStart());
         axios.post('/bookings/new', bookingData)
             .then(response => {
-                if(response.data.success)
-                     dispatch(bookingSuccess(response.data.bookingData));
-                else 
+                if(response.data.success){
+                    dispatch(bookingSuccess(response.data.bookingData));
+                    console.log(response.data)
+                }   
+                else {
                     dispatch(bookingFail(response.data.message))
+                }   
             })
             .catch(error => {
                 console.log(error.message)

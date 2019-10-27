@@ -10,8 +10,8 @@ class HomeBuilder extends Component {
         source: '',
         destination: '',
         journeyDate: '',
-        authClicked:false,
-        authCancel:false,
+        openModal:false,
+        authStart:false,
         searchData:''
   }
   fieldChanged = event => {
@@ -19,9 +19,17 @@ class HomeBuilder extends Component {
       [event.target.name]:event.target.value
     })
   }
-  handleAuthClicked = () => {
+  closeModal = () => {
     this.setState({
-      authClicked: !this.state.authClicked
+      openModal:false,
+      authStart:false
+    })
+  }
+
+  openModal = () => {
+    this.setState({
+      openModal:true,
+      authStart:true
     })
   }
   switchRoute = (event) => {
@@ -31,11 +39,11 @@ class HomeBuilder extends Component {
             destination:this.state.source
         })
     }
-  authCancelHandler =() => {
+  authLogout =() => {
     this.setState({
-      authClicked:!this.state.authClicked
+      authStart:false
     });
-    this.props.authCancel();
+    this.props.logout();
   }
   searchHandler = event => {
     event.preventDefault();  
@@ -44,10 +52,8 @@ class HomeBuilder extends Component {
       destination:this.state.destination,
       journeyDate:this.state.journeyDate
     }
-    this.props.onSourceChanged(this.state.source);
-    this.props.onDestinationChanged(this.state.destination);
-    this.props.onJourneyDateChanged(this.state.journeyDate);
     this.props.searchBuses(queryObject);
+    console.log("Inside homebuilder "+queryObject.journeyDate)
     this.setFieldForSearch(queryObject.source, queryObject.destination, queryObject.journeyDate);
     this.props.history.push('/search?source=' + queryObject.source + '&destination=' + queryObject.destination + "&journeyDate=" + queryObject.journeyDate);
   }
@@ -63,7 +69,7 @@ class HomeBuilder extends Component {
       )
         return (
             <Aux>
-                <Modal show={this.state.authClicked && !this.props.isAuthenticated} modalClosed={this.authCancelHandler}>
+                <Modal show={ this.state.authStart && this.state.openModal && !this.props.isAuthenticated } modalClosed={this.closeModal}>
                   {Authorize}
                 </Modal>
                 <Home fieldChanged={this.fieldChanged}
@@ -71,12 +77,10 @@ class HomeBuilder extends Component {
                       source={this.state.source}
                       destination={this.state.destination}
                       journeyDate={this.state.journeyDate}
-                      handleAuthClicked = {this.handleAuthClicked}
+                      handleAuthClicked = {this.openModal}
                       isAuthenticated= {this.props.isAuthenticated}
-                      name={this.props.name}
-                      logout={this.props.logout} 
+                      authLogout={this.authLogout} 
                       switchRoute={this.switchRoute}/>
-                
             </Aux>
         )
     }

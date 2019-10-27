@@ -51,6 +51,7 @@ class App extends Component {
     )
     let routes = (
       <Switch>
+        <Route path="/booknow/:id" component={this.state.loading ? () =>  spinner : asyncBooking} />
         <Route path="/search" component={this.state.loading ? () =>  spinner : asyncSearch} />
         <Route path="/" component={this.state.loading ? () => spinner : asyncHome}/>
       </Switch>
@@ -58,8 +59,8 @@ class App extends Component {
     if(this.props.isAuthenticated){
       routes = (
         <Switch>
-          <Route path="/showbookings" component={asyncShowBookings} />
           <Route path="/booknow/:id" component={this.state.loading ? () =>  spinner : asyncBooking} />
+          <Route path="/showbookings" component={asyncShowBookings} />
           <Route path="/search" component={this.state.loading ? () =>  spinner : asyncSearch} />
           <Route path="/" exact component={this.state.loading ? () => spinner : asyncHome}/>
         </Switch>

@@ -65,12 +65,13 @@ const searchBusesFail = (state,action) => {
     return updateObject(state,updatedState);
 }
 const setField = (state, action) => {
-    const formatDate = action.journeyDate.split('-');
-    const journeyDate = [formatDate[2], formatDate[1], formatDate[0]].join('-')
+    console.log("Inside search reducer " +action.journeyDate)
+    // const formatDate = action.journeyDate.split('-');
+    // const journeyDate = [formatDate[2], formatDate[1], formatDate[0]].join('-')
     const updatedState = {
         source: action.source,
         destination: action.destination,
-        journeyDate: journeyDate
+        journeyDate: action.journeyDate
     }
     return updateObject(state, updatedState);
 }

@@ -16,7 +16,8 @@ export {
     addSeat,
     removeSeat,
     changeTotalSeats,
-    updateTotalPrice
+    updateTotalPrice,
+    bookingInit
 } from './booking'
 
 export {

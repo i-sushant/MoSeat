@@ -14,7 +14,7 @@ const ShowBookings = (props) => {
                 <div className={classes.result_card} key={index}>
                         <div>
                             <h4>Journey Date</h4>
-                            <h4>{booking.journeyDate.substring(0,15)}</h4>
+                            <h4>{booking.journeyDate !== 'Invalid Date' ? booking.journeyDate.substring(0,15) : null}</h4>
                         </div>
                         <div>
                             <h4>Source</h4>

@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './Booking.module.css';
 import Navbar from '../UI/Navigation/Navbar/Navbar';
 import Footer from '../UI/Navigation/Footer/Footer';
-import Spinner from '../UI/Spinner/Spinner';
 const Booking = (props) => {
     let bookingOn = (
         <>
@@ -13,12 +12,9 @@ const Booking = (props) => {
             <h4>Passenger name : {props.passengerName}</h4>
             <h4>Total Seats : {props.totalSeats}</h4>
             <h4>Total Price : {props.totalPrice ? props.totalPrice : null}</h4>
-            <button className={classes.button} onClick={props.submitHandler}>BOOK NOW !</button>
+            <button className={classes.button} onClick={props.openModal}>BOOK NOW !</button>
         </>
     )
-    if(props.loading){
-        bookingOn = <Spinner />
-    }
     return (
         <div>
             <Navbar type="Booking"/>

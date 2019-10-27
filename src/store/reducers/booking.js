@@ -16,13 +16,13 @@ const initialState = {
 }
 
 const setField = (state, action) => {
-    const formatDate = action.journeyDate.split('-');
-    const journeyDate = [formatDate[2], formatDate[1], formatDate[0]].join('-')
+    // const formatDate = action.journeyDate.split('-');
+    // const journeyDate = [formatDate[2], formatDate[1], formatDate[0]].join('-')
     const updatedState ={
             busId: action.busId,
             source: action.source,
             destination: action.destination,
-            journeyDate:journeyDate,
+            journeyDate:action.journeyDate,
             basePrice:action.basePrice
     }
     return updateObject(state,updatedState);
@@ -39,10 +39,20 @@ const changeTotalSeats = (state,action) => {
 const updateTotalPrice = (state,action) => {
     return updateObject(state, {totalPrice: state.totalSeats * state.basePrice});
 }
+
+const bookingInit = (state, action) => {
+    return updateObject(state,{
+        loading:false,
+        booked:false,
+        bookError: null
+
+    })
+}
 const bookingSeatStart = (state, action) => {
     return updateObject(state, {
         loading:true,
-        booked:false
+        booked:false,
+        bookError: null
     })
 }
 const bookingSeatSuccess = (state, action) => {
@@ -96,6 +106,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.CHANGE_TOTAL_SEATS : return changeTotalSeats(state,action);
         case actionTypes.UPDATE_TOTAL_PRICE:return updateTotalPrice(state,action)
         case actionTypes.SET_FIELD: return setField(state, action);
+        case actionTypes.BOOKING_INIT: return bookingInit(state, action);
         case actionTypes.BOOKING_START: return bookingSeatStart(state, action);
         case actionTypes.BOOKING_SUCCESS: return bookingSeatSuccess(state, action);
         case actionTypes.BOOKING_FAIL: return bookingSeatFail(state, action);
