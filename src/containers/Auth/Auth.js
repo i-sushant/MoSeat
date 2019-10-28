@@ -121,15 +121,8 @@ class Auth extends Component {
          )
         if(this.props.loading){
             authForm = <Spinner />  
-            setTimeout(this.props.authReady,1000); 
+            setTimeout(() => this.props.authReady(),1000); 
         }
-        // if(this.props.error){
-        //     authForm = (
-        //         <Modal show={this.props.error !== ''} modalClosed={this.authCancelHandler}>
-        //             <h4>{this.props.error}</h4>
-        //         </Modal>
-        //     )
-        // }
         return (
             <div>
                 {authForm}

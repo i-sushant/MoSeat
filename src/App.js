@@ -46,7 +46,7 @@ class App extends Component {
     let spinner = (
       <div style={styles.loadingContainer}>
         <Spinner style={styles.main}/>
-        <h3 style={{'color':'#ed3330'}}>Loading...</h3>
+        <h3 style={{'color':'#ed3330','fontSize':'25px'}}>Loading...</h3>
       </div>
     )
     let routes = (

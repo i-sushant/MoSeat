@@ -60,7 +60,6 @@ export const searchBuses = (searchParams) => {
                 }      
             })
             .catch(error => {
-                console.log(error);
                 dispatch(searchBusesFail(error.message));
             })
     }

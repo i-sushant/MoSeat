@@ -8,6 +8,7 @@ import { faExchangeAlt, faClock,faFrown } from "@fortawesome/free-solid-svg-icon
 import Footer from '../UI/Navigation/Footer/Footer';
 import Spinner from "../UI/Spinner/Spinner";
 const Search = (props) =>  {
+    
     let results = (
       <div style={{'marginTop':'10%','color':'black','opacity':'0.5','textAlign':'center'}}>
         {props.error?<FontAwesomeIcon icon={faFrown} style={{'fontSize':'70px','opacity':'0.5'}}/> : null}

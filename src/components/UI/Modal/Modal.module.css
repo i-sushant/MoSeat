@@ -14,7 +14,7 @@
     transition: all 0.3s ease-out;
 }
 .openModal{
-    animation:modalOpen 0.5s ease-out forwards;
+    animation:modalOpen 0.4s ease-out forwards;
 }
 .closeModal{
     animation:modalClose 0.4s ease-out forwards;

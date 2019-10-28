@@ -62,14 +62,12 @@ export const bookNow = (bookingData) => {
             .then(response => {
                 if(response.data.success){
                     dispatch(bookingSuccess(response.data.bookingData));
-                    console.log(response.data)
                 }   
                 else {
                     dispatch(bookingFail(response.data.message))
                 }   
             })
             .catch(error => {
-                console.log(error.message)
                 dispatch(bookingFail(error.message));
             })
     }
@@ -99,7 +97,6 @@ export const fetchBookings = () => {
                 dispatch(fetchBookingsSuccess(response.data.bookings));
             })
             .catch(error => {
-                console.log(error.message)
                 dispatch(fetchBookingsFailure(error.message));
             })
     }

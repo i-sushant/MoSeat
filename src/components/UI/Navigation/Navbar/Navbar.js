@@ -30,7 +30,7 @@ const Navbar = (props) => {
                     </div>
                     <li>
                         <a href={props.type === 'Search' ? '/showbookings' : '/search' }>
-                        <strong>{props.type === 'Search' ? 'My Bookings' : 'Search' }</strong>
+                        <strong>{props.type === 'Search' ? props.isAuthenticated ? 'My Bookings': null : 'Search' }</strong>
                         </a>
                     </li>
                     {logout}

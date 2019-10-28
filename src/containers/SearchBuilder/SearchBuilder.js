@@ -48,8 +48,7 @@ class SearchBuilder extends Component {
     render() {
         return (
             <Aux>
-               <Search  availableBuses={this.state.searchData.buses}
-                        source={this.state.source}
+               <Search  source={this.state.source}
                         destination={this.state.destination}
                         journeyDate={this.state.journeyDate}
                         searchHandler={this.searchHandler}

@@ -12,12 +12,11 @@ const initialState = {
     bookings:[],
     busId:'',
     fetchError:'',
-    bookError:''
+    bookError:'',
+    fetchedBookings:[]
 }
 
 const setField = (state, action) => {
-    // const formatDate = action.journeyDate.split('-');
-    // const journeyDate = [formatDate[2], formatDate[1], formatDate[0]].join('-')
     const updatedState ={
             busId: action.busId,
             source: action.source,
@@ -86,7 +85,7 @@ const fetchBookingsStart = (state, action) => {
 
 const fetchBookingsSuccess = (state, action) => {
     return updateObject(state,{
-        bookings:action.bookings,
+        bookings: action.bookings,
         loading:false,
         fetchError:null
     })
