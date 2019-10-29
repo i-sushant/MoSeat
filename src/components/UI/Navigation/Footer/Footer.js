@@ -34,14 +34,14 @@ const Footer = () => {
                         <FontAwesomeIcon icon={faMapMarker} />
                     </i>
                     <p>
-                        <span>21 Revolution Street</span> Bhubaneswar, India
+                        <span>Mahura,Janla</span> Bhubaneswar, India
                     </p>
                     </div>
                     <div>
                     <i>
                         <FontAwesomeIcon icon={faPhone} />
                     </i>
-                    <p>+1 555 123456</p>
+                    <p>+917008929068</p>
                     </div>
                     <div>
                     <i>
@@ -56,8 +56,7 @@ const Footer = () => {
                 <div className={classes.footer_right}>
                     <p className={classes.footer_company_about}>
                     <span>About the company</span>
-                    MO Seat is a blog for web designers, graphic designers, web
-                    developers &amp; SEO Learner.
+                    MO Seat is a bus seat reservation portal for making bus booking hassle free. 
                     </p>
                     <div className={classes.footer_icons}>
                     <a href="/">
