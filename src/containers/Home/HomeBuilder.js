@@ -40,31 +40,11 @@ class HomeBuilder extends Component {
           return city.match(regex)
         })
     }
-    console.log(event.target.name+"CityList")
     this.setState({
       [event.target.name]: event.currentTarget.value,
       [event.target.name+"CityList"] : cityList,
       showSuggestion:true
     });
-    
-    
-    // if(event.target.name === 'source'){
-    //   this.setState({
-    //     sourceCityList: cities.filter(city => {
-    //       console.log(this.state.source) 
-    //       const regex = new RegExp(this.state.source, 'gi');
-    //       return city.match(regex)
-    //     })
-    //   })
-    // }
-    // if(event.target.name === 'destination'){
-    //   this.setState({
-    //     destinationCityList: cities.filter(city => {
-    //       const regex = new RegExp(event.target.value, 'gi');
-    //       return city.match(regex)
-    //     })
-    //   })
-    // }
   }
   closeModal = () => {
     this.setState({
@@ -100,7 +80,6 @@ class HomeBuilder extends Component {
       journeyDate:this.state.journeyDate
     }
     this.props.searchBuses(queryObject);
-    console.log("Inside homebuilder "+queryObject.journeyDate)
     this.setFieldForSearch(queryObject.source, queryObject.destination, queryObject.journeyDate);
     this.props.history.push('/search?source=' + queryObject.source + '&destination=' + queryObject.destination + "&journeyDate=" + queryObject.journeyDate);
   }
