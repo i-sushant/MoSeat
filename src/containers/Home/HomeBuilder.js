@@ -5,19 +5,66 @@ import Modal from '../../components/UI/Modal/Modal';
 import Auth from '../Auth/Auth'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index' 
+import {cities}  from './city'
 class HomeBuilder extends Component {
     state = {
         source: '',
+        sourceCityList:'',
+        destinationCityList:'',
         destination: '',
         journeyDate: '',
         openModal:false,
         authStart:false,
-        searchData:''
+        searchData:'',
+        showSuggestion:false
   }
-  fieldChanged = event => {
+  addFieldValue = (event,fieldValue,fieldName) => {
     this.setState({
-      [event.target.name]:event.target.value
-    })
+      [fieldName]: fieldValue,
+      [fieldName+"CityList"]:[],
+      showSuggestion:false
+    });
+  }
+  fieldChanged = (event,fieldName) => { 
+    const userInput = event.currentTarget.value;
+    let cityList = [];
+    if (fieldName === 'source') {
+        cityList = cities.filter(city => {
+          const regex = new RegExp(userInput, 'gi');
+          return city.match(regex)
+        })
+    }
+    if (fieldName === 'destination') {
+        cityList = cities.filter(city => {
+          const regex = new RegExp(userInput, 'gi');
+          return city.match(regex)
+        })
+    }
+    console.log(event.target.name+"CityList")
+    this.setState({
+      [event.target.name]: event.currentTarget.value,
+      [event.target.name+"CityList"] : cityList,
+      showSuggestion:true
+    });
+    
+    
+    // if(event.target.name === 'source'){
+    //   this.setState({
+    //     sourceCityList: cities.filter(city => {
+    //       console.log(this.state.source) 
+    //       const regex = new RegExp(this.state.source, 'gi');
+    //       return city.match(regex)
+    //     })
+    //   })
+    // }
+    // if(event.target.name === 'destination'){
+    //   this.setState({
+    //     destinationCityList: cities.filter(city => {
+    //       const regex = new RegExp(event.target.value, 'gi');
+    //       return city.match(regex)
+    //     })
+    //   })
+    // }
   }
   closeModal = () => {
     this.setState({
@@ -80,7 +127,11 @@ class HomeBuilder extends Component {
                       handleAuthClicked = {this.openModal}
                       isAuthenticated= {this.props.isAuthenticated}
                       authLogout={this.authLogout} 
-                      switchRoute={this.switchRoute}/>
+                      switchRoute={this.switchRoute}
+                      destinationCityList={this.state.destinationCityList}
+                      sourceCityList={this.state.sourceCityList}
+                      addFieldValue ={this.addFieldValue}
+                      showSuggestion={this.state.showSuggestion}/>
             </Aux>
         )
     }

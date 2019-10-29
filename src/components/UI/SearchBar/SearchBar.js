@@ -4,6 +4,21 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faExchangeAlt} from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom'
 const SearchBar = (props) => {
+    let sourceList = [];
+    let destinationList = [];
+    if(props.showSuggestion){
+        if(props.source && props.sourceCityList.length){
+        sourceList = props.sourceCityList.map((source,index) => {
+            return <li key={index} onClick={(event) => props.addFieldValue(event,source,"source")}>{source}</li>
+        })
+    }
+        if(props.destination && props.destinationCityList.length){
+            destinationList = props.destinationCityList.map((destination,index) => {
+                return <li key={index} onClick={(event) => props.addFieldValue(event,destination,"destination")}>{destination}</li>
+            })
+        }
+    }
+    
     return (
         <div>
             <form className={classes.search_container} onSubmit={props.submitHandler}>
@@ -15,7 +30,7 @@ const SearchBar = (props) => {
                     type="text"
                     name="source"
                     value={props.source}
-                    onChange= {(event) => props.fieldChanged(event)}
+                    onChange= {(event) => props.fieldChanged(event,"source")}
                     />
                     <span className={classes.focus_border} />
                 </div>
@@ -30,7 +45,7 @@ const SearchBar = (props) => {
                     type="text"
                     name='destination'
                     value={props.destination}
-                    onChange = {(event) => props.fieldChanged(event)}
+                    onChange = {(event) => props.fieldChanged(event,"destination")}
                     />
                     <span className={classes.focus_border} />
                 </div>
@@ -53,7 +68,10 @@ const SearchBar = (props) => {
                     Search
                     </Link>
                 </div>
+                <div className={classes.sourceList}>{sourceList}</div>
+                <div className={classes.destinationList}>{destinationList}</div>
             </form>
+            
         </div>
     )
 }
