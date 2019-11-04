@@ -45,7 +45,9 @@ const Search = (props) =>  {
                       <span className={[classes.selectseats, classes.seat_availability].join(' ')}>Available Seats : {bus.availableSeats.length}</span>
                     </div>
                     <div>
-                      <Link className={[classes.selectseats, classes.modalbtn1].join(' ')} to={'/booknow/'+bus._id}  onClick={() => props.setFieldForBooking(bus._id,bus.source,bus.destination,bus.fare)}>SUBMIT</Link>
+                      <Link to={'/booknow/'+bus._id}  >
+                        <button className={[classes.selectseats, classes.modalbtn1].join(' ')} onClick={() => props.setFieldForBooking(bus._id,bus.source,bus.destination,bus.fare)}>SUBMIT</button>
+                      </Link>
                     </div> 
                 </div>
             </div>)

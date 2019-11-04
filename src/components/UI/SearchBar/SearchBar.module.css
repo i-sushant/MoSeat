@@ -111,8 +111,8 @@
     text-transform: uppercase;
     text-decoration: none;
     background: #ed3330;
-    padding: 15px;
-    width: 100%;
+    width: 15em;
+    height:4em;
     text-align: center;
     border-radius: 5px;
     display: inline-block;
@@ -126,7 +126,9 @@
     letter-spacing: 1px;
     transition: all 0.4s ease 0s;
 }
-
+.btnDisable {
+    opacity: 0.5;
+}
 .sourceList{
     position: absolute;
     width:23%;
@@ -208,5 +210,9 @@
     .sourceList,
     .destinationList{
         width:40%
+    }
+    .searchbutton{
+        width:5em;
+        height:3em;
     }
 }

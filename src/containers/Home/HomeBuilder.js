@@ -22,29 +22,35 @@ class HomeBuilder extends Component {
     this.setState({
       [fieldName]: fieldValue,
       [fieldName+"CityList"]:[],
-      showSuggestion:false
+      showSuggestion:false,
+      valid:true
     });
   }
   fieldChanged = (event,fieldName) => { 
     const userInput = event.currentTarget.value;
+    const regex = new RegExp(userInput,'gi');
     let cityList = [];
     if (fieldName === 'source') {
         cityList = cities.filter(city => {
-          const regex = new RegExp(userInput, 'gi');
           return city.match(regex)
         })
     }
     if (fieldName === 'destination') {
         cityList = cities.filter(city => {
-          const regex = new RegExp(userInput, 'gi');
           return city.match(regex)
         })
     }
     this.setState({
       [event.target.name]: event.currentTarget.value,
-      [event.target.name+"CityList"] : cityList,
-      showSuggestion:true
-    });
+      [event.target.name + "CityList"]: cityList,
+      showSuggestion: true,
+      valid:true
+    }); 
+  }
+  dateChanged = (event) => {
+    this.setState({
+      [event.target.name]:event.target.value
+    })
   }
   closeModal = () => {
     this.setState({
@@ -110,7 +116,9 @@ class HomeBuilder extends Component {
                       destinationCityList={this.state.destinationCityList}
                       sourceCityList={this.state.sourceCityList}
                       addFieldValue ={this.addFieldValue}
-                      showSuggestion={this.state.showSuggestion}/>
+                      dateChanged = {this.dateChanged}
+                      showSuggestion={this.state.showSuggestion}
+                      valid={this.state.valid}/>
             </Aux>
         )
     }

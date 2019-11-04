@@ -6,6 +6,12 @@ import {Link} from 'react-router-dom'
 const SearchBar = (props) => {
     let sourceList = [];
     let destinationList = [];
+    let dateNow = new Date();
+    let btnDisabled = props.source === '' || props.destination === '' || new Date(props.journeyDate).getTime() < dateNow.setDate(dateNow.getDate() - 1) || props.journeyDate === '' || !props.valid;
+    let btnStyle = classes.searchbutton;
+    if (btnDisabled) {
+        btnStyle = [classes.searchbutton, classes.btnDisable].join(' ');
+    }
     if(props.showSuggestion){
         if(props.source && props.sourceCityList.length){
         sourceList = props.sourceCityList.map((source,index) => {
@@ -56,16 +62,15 @@ const SearchBar = (props) => {
                     type="date"
                     name='journeyDate'
                     value={props.journeyDate}
-                    onChange = {(event) => props.fieldChanged(event)}
+                    onChange = {(event) => props.dateChanged(event)}
                     />
                     <span className={classes.focus_border}/>
                 </div>
                 <div className={classes.search_btn}>
-                    <Link disabled
+                    <Link 
                     to={'/search?source='+props.source+"&destination="+props.destination}
-                    className={classes.searchbutton}
-                    onClick={props.searchHandler}>
-                    Search
+                    >
+                        <button className={btnStyle} onClick={props.searchHandler} disabled={btnDisabled}>Search</button>
                     </Link>
                 </div>
                 <div className={classes.sourceList}>{sourceList}</div>
